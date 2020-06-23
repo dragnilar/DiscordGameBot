@@ -9,6 +9,7 @@ namespace GoogunkBot.Modules
     {
         public string ConvertAmaString(string amaString)
         {
+            //TODO - Needs to handle personal pronouns in a more elegant manner, I.E. My, me, etc
             var lowerString = amaString.ToLower();
             var response = string.Empty;
             var endAmaPosition = lowerString.LastIndexOf("ama");
@@ -32,7 +33,7 @@ namespace GoogunkBot.Modules
             }
             else
             {
-                response = "Do you " + lowerString;
+                response = "Are you " + lowerString;
             }
 
             return response;
