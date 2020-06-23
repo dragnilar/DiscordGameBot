@@ -37,6 +37,7 @@ namespace GoogunkBot
                 if (key != null)
                 {
                     await e.Message.RespondAsync(value);
+                    return;
                 }
 
                 if (e.Message.Content.ToLower().EndsWith(" ama"))
