@@ -13,6 +13,7 @@ namespace GoogunkBot.Modules
         readonly Random _randomNumber = new Random(Guid.NewGuid().GetHashCode());
 
         [Command("box")]
+        [Description("Gives you a random picture of a lovely cardboard box.")]
         public async Task Box(CommandContext ctx)
         {
             var result = _randomNumber.Next(1, 10);
@@ -21,13 +22,16 @@ namespace GoogunkBot.Modules
         }
 
         [Command("urine")]
+        [Description("Congratulate someone on bathing in Urine.")]
         public async Task Urine(CommandContext ctx)
         {
+            var name = ctx.RawArgumentString;
             await ctx.RespondAsync(
-                "Congratulations! You've essentially bathed yourself in urine and I hope you have a lot to show for it. Like diarrhea, muscle soreness, fatigue, and a fever. You also dont know what they could've ingested and how harmful the urine was. The only POSSIBLY example of consuming pee is when you're dying of dehydration in the middle of the fucking Sahara.");
+                $"Congratulations {name}! You've essentially bathed yourself in urine and I hope you have a lot to show for it. Like diarrhea, muscle soreness, fatigue, and a fever. You also dont know what they could've ingested and how harmful the urine was. The only POSSIBLY example of consuming pee is when you're dying of dehydration in the middle of the fucking Sahara.");
         }
 
         [Command("bombastic")]
+        [Description("All about Mr.Bombastic")]
         public async Task Bombastic(CommandContext ctx)
         {
             await ctx.RespondAsync(
