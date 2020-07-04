@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Config.Net;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using GoogunkBot.BackEnd.Configuration;
 using GoogunkBot.Modules;
 
 namespace GoogunkBot
@@ -13,9 +15,13 @@ namespace GoogunkBot
         private static CommandsNextExtension CommandsNext;
         private static CopyPastaModule CopyPastaModule;
         private static AmaModule AmaModule;
+        private static IGoogunkBackendConfig Config;
 
         private static void Main(string[] args)
         {
+            Config = new ConfigurationBuilder<IGoogunkBackendConfig>()
+                .UseJsonConfig()
+                .Build();
             CopyPastaModule = new CopyPastaModule();
             AmaModule = new AmaModule();
             MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -25,7 +31,7 @@ namespace GoogunkBot
         {
             DiscordClient = new DiscordClient(new DiscordConfiguration
             {
-                Token = "NzIxNTAxNTUwNjIyODAyMDIz.XuWiog.gdHFWIfYXOLQOffeDT4z14e42Kg",
+                Token = Config.Token,
                 TokenType = TokenType.Bot,
                 UseInternalLogHandler = true,
                 LogLevel = LogLevel.Error
