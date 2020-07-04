@@ -52,6 +52,12 @@ namespace GoogunkBot
                     return;
                 }
 
+                if(e.Message.Content.ToLower() == "fuck you bot")
+                {
+                    await e.Message.RespondAsync(CopyPastaModule.GetWaffle());
+                    return;
+                }
+
                 if (e.Message.Content.ToLower().EndsWith(" ama"))
                 {
                     await e.Message.RespondAsync(AmaModule.ConvertAmaString(e.Message.Content));
