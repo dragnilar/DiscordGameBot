@@ -6,6 +6,7 @@ using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using GoogunkBot.BackEnd.Configuration;
 using GoogunkBot.Modules;
+using GoogunkBot.Singletons;
 
 namespace GoogunkBot
 {
@@ -14,6 +15,8 @@ namespace GoogunkBot
         private static DiscordClient DiscordClient;
         private static CommandsNextExtension CommandsNext;
         private static CopyPastaModule CopyPastaModule;
+        private static NamModule NamModule;
+        //private static ShittyVerseModule ShittyVerseModule;
         private static AmaModule AmaModule;
         private static IGoogunkBackendConfig Config;
 
@@ -24,6 +27,9 @@ namespace GoogunkBot
                 .Build();
             CopyPastaModule = new CopyPastaModule();
             AmaModule = new AmaModule();
+            NamModule = new NamModule();
+            //ShittyVerseModule = new ShittyVerseModule();
+            GameState.Initialize();
             MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
@@ -57,6 +63,8 @@ namespace GoogunkBot
                 StringPrefixes = new List<string>{"plz", "PLZ", "Plz"}
             });
             CommandsNext.RegisterCommands<ShittyModule>();
+            CommandsNext.RegisterCommands<NamModule>();
+            //CommandsNext.RegisterCommands<ShittyVerseModule>();
             
             await DiscordClient.ConnectAsync();
             await Task.Delay(-1);

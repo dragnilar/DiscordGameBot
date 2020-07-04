@@ -11,7 +11,7 @@ using GoogunkBot.Singletons;
 
 namespace GoogunkBot.Modules
 {
-    public class NamModule
+    public class NamModule : BaseCommandModule
     {
         [Command("poopballs")]
         [Description("Get Drafted with the Poop Balls and get sent to Nam")]
@@ -19,10 +19,8 @@ namespace GoogunkBot.Modules
         {
             GameUser draftedUser = null;
             var discordId = ctx.Member.Id;
-            if (GameState.GameUsers.Any())
-            {
-                draftedUser = GameState.GameUsers.FirstOrDefault(x => x.DiscordUserId == discordId);
-            }
+            draftedUser = GameState.GameUsers.FirstOrDefault(x => x.DiscordUserId == discordId);
+
             if (draftedUser != null && draftedUser.IsDrafted)
             {
                 await ctx.RespondAsync(
