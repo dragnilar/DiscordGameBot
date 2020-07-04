@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
+using GoogunkBot.BackEnd.DbContexts;
+using GoogunkBot.BackEnd.Models;
 using GoogunkBot.Properties;
 
 namespace GoogunkBot.Modules
@@ -16,7 +19,7 @@ namespace GoogunkBot.Modules
         [Description("Gives you a random picture of a lovely cardboard box.")]
         public async Task Box(CommandContext ctx)
         {
-            var result = _randomNumber.Next(1, 10);
+            var result = _randomNumber.Next(1, 11);
             var response = Path.Combine(Environment.CurrentDirectory, $"Pictures\\Boxes\\box{result}.jpg");
             await ctx.RespondWithFileAsync(response);
         }

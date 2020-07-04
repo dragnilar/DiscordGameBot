@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -55,6 +55,10 @@
     <ItemGroup>
       <PackageReference Include="DSharpPlus" Version="4.0.0-nightly-00707" />
       <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.0-nightly-00707" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GoogunkBot.BackEnd\GoogunkBot.BackEnd.csproj" />
     </ItemGroup>
 
     <ItemGroup>

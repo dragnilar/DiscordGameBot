@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogunkBot", "GoogunkBot\GoogunkBot.csproj", "{B7D98024-9CEC-4B8F-8E54-91C1F2FB2A48}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogunkBot", "GoogunkBot\GoogunkBot.csproj", "{B7D98024-9CEC-4B8F-8E54-91C1F2FB2A48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogunkBot.BackEnd", "GoogunkBot.BackEnd\GoogunkBot.BackEnd.csproj", "{2EF7FAE4-5816-4D8D-85B6-CAF77BD9A2C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{B7D98024-9CEC-4B8F-8E54-91C1F2FB2A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D98024-9CEC-4B8F-8E54-91C1F2FB2A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7D98024-9CEC-4B8F-8E54-91C1F2FB2A48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EF7FAE4-5816-4D8D-85B6-CAF77BD9A2C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EF7FAE4-5816-4D8D-85B6-CAF77BD9A2C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EF7FAE4-5816-4D8D-85B6-CAF77BD9A2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EF7FAE4-5816-4D8D-85B6-CAF77BD9A2C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEF9986E-7CAB-4B85-B9BF-54CB828BAC27}
 	EndGlobalSection
 EndGlobal
