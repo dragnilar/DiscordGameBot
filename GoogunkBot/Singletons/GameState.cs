@@ -29,5 +29,12 @@ namespace GoogunkBot.Singletons
             GameUsers = await dbContext.GameUsers.ToListAsync().ConfigureAwait(false);
             return newUser;
         }
+
+        public static async Task<List<GameUser>> GetAndResyncUsers()
+        {
+            await using var dbContext = new GameDbContext();
+            GameUsers = await dbContext.GameUsers.ToListAsync().ConfigureAwait(false);
+            return GameUsers;
+        }
     }
 }

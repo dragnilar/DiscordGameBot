@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using GoogunkBot.BackEnd.DbContexts;
 using GoogunkBot.BackEnd.Models;
 using GoogunkBot.Singletons;
@@ -33,6 +34,29 @@ namespace GoogunkBot.Modules
                 await ctx.RespondAsync(
                     $"You've just been drafted and sent to Nam with the Poopballs, {ctx.Member.DisplayName}! Sucks to be you!");
             }
+        }
+
+        [Command("drafted")]
+        [Description("Get List of everyone who has been drafted with the Poop Balls and sent to Nam")]
+        public async Task Drafted(CommandContext ctx)
+        {
+            var players = GameState.GameUsers;
+            var embed = new DiscordEmbedBuilder();
+            embed.Title = "Drafted Soldiers";
+            embed.Description = "All these maggots got drafted and sent to Nam with the Poop Balls!";
+            var members = ctx.Guild.Members;
+            foreach (var player in players)
+            {
+                var member = members.Where(x => x.Key == player.DiscordUserId).FirstOrDefault();
+                if (member.Value != null)
+                {
+                    embed.AddField($"{member.Value.Username}", $"Draft Date: {player.DateTimeAdded:f}");
+                }
+
+            }
+
+
+            await ctx.RespondAsync("", embed: embed);
         }
     }
 }
