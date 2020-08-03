@@ -9,32 +9,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoogunkBot.Singletons
 {
-    public static class GameState
+    public static class GameUtils
     {
-        public static List<GameUser> GameUsers;
-
-        public static void Initialize()
-        {
-            using (var dbContext = new GameDbContext())
-            {
-                GameUsers = dbContext.GameUsers.ToList();
-            }
-        }
 
         public static async Task<GameUser> AddNewUser(GameUser newUser)
         {
             await using var dbContext = new GameDbContext();
             dbContext.Add(newUser);
             await dbContext.SaveChangesAsync().ConfigureAwait(false);
-            GameUsers = await dbContext.GameUsers.ToListAsync().ConfigureAwait(false);
+            await dbContext.GameUsers.ToListAsync().ConfigureAwait(false);
             return newUser;
         }
 
-        public static async Task<List<GameUser>> GetAndResyncUsers()
+        public static async Task<List<GameUser>> GetGameUsers()
         {
             await using var dbContext = new GameDbContext();
-            GameUsers = await dbContext.GameUsers.ToListAsync().ConfigureAwait(false);
-            return GameUsers;
+            var users = await dbContext.GameUsers.ToListAsync().ConfigureAwait(false);
+            return users;
         }
+
+        public static async Task<GameUser> GetGameUser(ulong discordId)
+        {
+            await using var dbContext = new GameDbContext();
+            var gameUser = await dbContext.GameUsers.FirstOrDefaultAsync(x => x.DiscordUserId == discordId);
+            return gameUser;
+        }
+
+
+
     }
 }
