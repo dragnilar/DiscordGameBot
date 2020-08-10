@@ -6,6 +6,8 @@
         <ApplicationIcon>GoogunkBot.ico</ApplicationIcon>
         <AssemblyVersion>2020.0803.6.0</AssemblyVersion>
         <FileVersion>2020.0803.6.0</FileVersion>
+        <Configurations>Release;Debug</Configurations>
+        <Platforms>x64</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
