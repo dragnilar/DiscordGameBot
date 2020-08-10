@@ -12,14 +12,15 @@ namespace GoogunkBot.Modules
     public class CopyPastaModule
     {
         private Faker Faker = new Faker();
-        private List<CopyPasta> _copyPastas;
+        private List<CopyPasta> _copyPastas { get; set; }
         public IEnumerable<CopyPasta> CopyPastas => _copyPastas ?? LoadCopyPastas();
 
         private List<CopyPasta> LoadCopyPastas()
         {
             using var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Csv\\CopyPasta.csv"));
             using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
-            return csvReader.GetRecords<CopyPasta>().ToList();
+            _copyPastas = csvReader.GetRecords<CopyPasta>().ToList();
+            return _copyPastas;
         }
 
         public string GetWaffle()
