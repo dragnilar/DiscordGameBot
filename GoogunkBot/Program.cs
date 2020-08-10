@@ -59,10 +59,10 @@ namespace GoogunkBot
 
         private static async Task CheckForCannedResponses(MessageCreateEventArgs e)
         {
-            var (key, value) = _copyPastaModule.CopyPasta.FirstOrDefault(x => x.Key == e.Message.Content.ToLower());
-            if (key != null)
+            var copyPasta = _copyPastaModule.CopyPastas.FirstOrDefault(x => x.Command == e.Message.Content.ToLower());
+            if (copyPasta != null)
             {
-                await e.Message.RespondAsync(value);
+                await e.Message.RespondAsync(copyPasta.Pasta);
                 return;
             }
 
