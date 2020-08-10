@@ -192,6 +192,10 @@
       <Content Include="Pictures\Boxes\box9.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Csv\CopyPasta.csv" />
+      <Content Include="Csv\CopyPasta.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
