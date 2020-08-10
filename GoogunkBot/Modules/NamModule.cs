@@ -83,7 +83,17 @@ namespace GoogunkBot.Modules
                         "You need to get drafted and go to Nam with the Poop Balls before you can do that, shit head.");
                     return;
                 }
-                
+
+                dbUser.CoolDown ??= new CoolDown();
+
+                var secondsSinceLastMine = (DateTime.Now - dbUser.CoolDown.MineLastUsed).Seconds;
+                if ( secondsSinceLastMine < 30)
+                {
+                    await ctx.RespondAsync(
+                        $"You just went out into the mine fields not too long ago shit head, give the damn poop balls {30 - secondsSinceLastMine} seconds to get bandaged up!");
+                    return;
+                }
+                dbUser.CoolDown.MineLastUsed = DateTime.Now;
                 var faker = new Faker();
                 var roll = faker.Random.Int(1, 100);
                 if (roll <= 12)
