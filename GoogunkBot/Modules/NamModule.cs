@@ -86,19 +86,19 @@ namespace GoogunkBot.Modules
 
                 dbUser.CoolDown ??= new CoolDown();
 
-                var secondsSinceLastMine = (DateTime.Now - dbUser.CoolDown.MineLastUsed).Seconds;
+                var secondsSinceLastMine = (DateTime.Now - dbUser.CoolDown.MineLastUsed).TotalSeconds;
                 if ( secondsSinceLastMine < 30)
                 {
                     await ctx.RespondAsync(
-                        $"You just went out into the mine fields not too long ago shit head, give the damn poop balls {30 - secondsSinceLastMine} seconds to get bandaged up!");
+                        $"You just went out into the mine fields not too long ago shit head, give the damn poop balls {(30 - secondsSinceLastMine):N2} seconds to get bandaged up!");
                     return;
                 }
                 dbUser.CoolDown.MineLastUsed = DateTime.Now;
                 var faker = new Faker();
                 var roll = faker.Random.Int(1, 100);
-                if (roll <= 12)
+                if (roll <= 20)
                 {
-                    var loss = faker.Random.Long(10, 50) * roll;
+                    var loss = faker.Random.Long(100, 500) * roll;
                     if (dbUser.PoopBucks < loss)
                     {
                         dbUser.PoopBucks = 0;
