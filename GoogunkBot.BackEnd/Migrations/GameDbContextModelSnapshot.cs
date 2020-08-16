@@ -97,6 +97,53 @@ namespace GoogunkBot.BackEnd.Migrations
                     b.ToTable("Items");
                 });
 
+            modelBuilder.Entity("GoogunkBot.BackEnd.Models.MiniGameChoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChoiceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FailResultChance")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FailResultText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiniGameName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RegularResultChance")
+                        .HasColumnType("int");
+
+                    b.Property<long>("RegularResultMoney")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("RegularResultText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SpecialResultChance")
+                        .HasColumnType("int");
+
+                    b.Property<long>("SpecialResultMoney")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SpecialResultText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SpecialRewardId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpecialRewardId");
+
+                    b.ToTable("MiniGameChoices");
+                });
+
             modelBuilder.Entity("GoogunkBot.BackEnd.Models.Shop", b =>
                 {
                     b.Property<int>("Id")
@@ -128,6 +175,13 @@ namespace GoogunkBot.BackEnd.Migrations
                     b.HasOne("GoogunkBot.BackEnd.Models.Shop", "Shop")
                         .WithMany("Items")
                         .HasForeignKey("ShopId");
+                });
+
+            modelBuilder.Entity("GoogunkBot.BackEnd.Models.MiniGameChoice", b =>
+                {
+                    b.HasOne("GoogunkBot.BackEnd.Models.Item", "SpecialReward")
+                        .WithMany()
+                        .HasForeignKey("SpecialRewardId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,6 +1,6 @@
 ﻿namespace GoogunkBot.BackEnd.Models
 {
-    public class MiniGameChoices
+    public class MiniGameChoice
     {
         public int Id { get; set; }
         public string ChoiceName { get; set; }

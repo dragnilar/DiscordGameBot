@@ -24,6 +24,7 @@ namespace GoogunkBot.BackEnd.DbContexts
         public DbSet<Shop> Shops { get; set; }
         public DbSet<GameUser> GameUsers { get; set; }
         public DbSet<CoolDown> CoolDowns { get; set; }
+        public DbSet<MiniGameChoice> MiniGameChoices { get; set; }
 
     }
 }
