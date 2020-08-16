@@ -79,6 +79,12 @@ namespace GoogunkBot.BackEnd.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("Price")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("SellPrice")
+                        .HasColumnType("bigint");
+
                     b.Property<int?>("ShopId")
                         .HasColumnType("int");
 
