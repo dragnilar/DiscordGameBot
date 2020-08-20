@@ -128,7 +128,7 @@ namespace GoogunkBot.Modules
             "Run a Search and Destroy Mission to get some Gooks and maybe also experience a horrible drug trip or worse...")]
         public async Task SearchAndDestroy(CommandContext ctx)
         {
-            
+            await ctx.RespondAsync("This command is under construction. :P");
         }
         
     }

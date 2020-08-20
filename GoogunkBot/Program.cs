@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Config.Net;
@@ -73,6 +75,11 @@ namespace GoogunkBot
                     return;
                 case "k ama":
                     await e.Message.RespondAsync("k");
+                    break;
+                case "keira":
+                case "keira knightly":
+                    await e.Message.RespondWithFileAsync(Path.Combine(Environment.CurrentDirectory,
+                        $"Pictures\\Other\\keira.jpg"), TemporaryStrings.KeiraString);
                     break;
             }
 

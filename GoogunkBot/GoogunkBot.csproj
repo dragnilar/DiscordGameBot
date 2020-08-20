@@ -199,6 +199,10 @@
       </Content>
       <None Remove="Csv\CopyPasta.csv" />
       <None Remove="Csv\CopyPasta.xlsx" />
+      <None Remove="Pictures\Other\keira.jpg" />
+      <Content Include="Pictures\Other\keira.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
