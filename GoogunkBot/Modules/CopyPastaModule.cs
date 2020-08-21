@@ -19,8 +19,7 @@ namespace GoogunkBot.Modules
         {
             using var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Csv\\CopyPasta.csv"));
             using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
-            _copyPastas = csvReader.GetRecords<CopyPasta>().ToList();
-            return _copyPastas;
+            return  csvReader.GetRecords<CopyPasta>().ToList();
         }
 
         public string GetWaffle()

@@ -1,64 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper;
+using GoogunkBot.BackEnd.Extensions;
+using GoogunkBot.BackEnd.Models;
 
 namespace GoogunkBot.Modules
 {
     public class AmaModule
     {
+
+        private List<AmaTransformer> LoadTransformers()
+        {
+            using var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Csv\\AmaStrings.csv"));
+            using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+            return csvReader.GetRecords<AmaTransformer>().ToList();
+        }
+
         public string ConvertAmaString(string amaString)
         {
-            //TODO - Needs to handle personal pronouns in a more elegant manner, I.E. My, me, etc
-            var lowerString = amaString.ToLower();
-            var response = string.Empty;
-            var endAmaPosition = lowerString.LastIndexOf("ama");
-            if (endAmaPosition < 0)
+            var transformers = LoadTransformers();
+            var returnString = amaString.ToLower();
+            foreach (var amaTransformer in transformers.Where(amaTransformer => returnString.Contains(amaTransformer.InValue.ToLower())))
             {
-                return "Do you want me to ask you anything?";
+                returnString = returnString.ReplaceFirst(amaTransformer.InValue.ToLower(), amaTransformer.OutValue);
+                break;
             }
 
-            lowerString = lowerString.Substring(0, endAmaPosition) + "can I ask you anything?";
+            returnString = ReplaceEndAMAString(returnString);
 
-            var hasIamResult = HasImString(lowerString);
-            if (hasIamResult.hasIm)
-            {
-                var position = lowerString.IndexOf(hasIamResult.imString);
-                if (position >= 0)
-                {
-                    var replacement = lowerString.Substring(0, position) + "Are you" +
-                                      lowerString.Substring(position + hasIamResult.imString.Length);
-                    response = replacement;
-                }
-            }
-            else
-            {
-                response = "Are you " + lowerString;
-            }
-
-            return response;
-
+            return returnString;
         }
 
-        private (bool hasIm, string imString) HasImString(string lowerAmaString)
+        private string ReplaceEndAMAString(string returnString)
         {
-            if (lowerAmaString.StartsWith("i'm"))
+            var amaEndStrings = new HashSet<string>
             {
-                return (true, "i'm");
-            }
-
-            if (lowerAmaString.StartsWith("i am"))
-            {
-                return (true, "i am");
-            }
-
-            if (lowerAmaString.StartsWith("im"))
-            {
-                return (true, "im");
-            }
-
-            return (false, string.Empty);
+                "AMA","ama","AmA","AMa","aMA","aMa"
+            };
+            var matchingEnd = amaEndStrings.FirstOrDefault(returnString.Contains);
+            returnString = returnString.ReplaceLastOccurrence(matchingEnd, "can I ask you anything?");
+            return returnString;
         }
-
     }
 }

@@ -56,6 +56,9 @@
       <None Remove="Pictures\Boxes\box7.jpg" />
       <None Remove="Pictures\Boxes\box8.jpg" />
       <None Remove="Pictures\Boxes\box9.jpg" />
+      <None Update="Csv\AmaStrings.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
