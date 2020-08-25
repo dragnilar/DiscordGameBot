@@ -25,12 +25,18 @@ namespace AutomoderatorGameBot.Modules
         {
             var transformers = LoadTransformers();
             var returnString = amaString.ToLower();
+            var transformed = false;
             foreach (var amaTransformer in transformers.Where(amaTransformer => returnString.Contains(amaTransformer.InValue.ToLower())))
             {
                 returnString = returnString.ReplaceFirst(amaTransformer.InValue.ToLower(), amaTransformer.OutValue);
+                transformed = true;
                 break;
             }
 
+            if (!transformed)
+            {
+                returnString = "Are you " + returnString;
+            }
             returnString = ReplaceEndAMAString(returnString);
 
             return returnString;
