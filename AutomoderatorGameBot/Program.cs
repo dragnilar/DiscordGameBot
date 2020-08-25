@@ -68,6 +68,13 @@ namespace AutomoderatorGameBot
                 return;
             }
 
+            var videoPasta = _copyPastaModule.VideoPastas.FirstOrDefault(x => x.Keyword == e.Message.Content.ToLower());
+            if (videoPasta != null)
+            {
+                await e.Message.RespondWithFileAsync(videoPasta.FilePath, "BEHOLD, THE POWER OF GOD");
+                return;
+            }
+
             switch (e.Message.Content.ToLower())
             {
                 case "fuck you bot":
@@ -75,17 +82,18 @@ namespace AutomoderatorGameBot
                     return;
                 case "k ama":
                     await e.Message.RespondAsync("k");
-                    break;
+                    return;
                 case "keira":
                 case "keira knightly":
                     await e.Message.RespondWithFileAsync(Path.Combine(Environment.CurrentDirectory,
                         $"Pictures\\Other\\keira.jpg"), TemporaryStrings.KeiraString);
-                    break;
+                    return;
             }
 
             if (e.Message.Content.ToLower().EndsWith(" ama"))
             {
                 await e.Message.RespondAsync(_amaModule.ConvertAmaString(e.Message.Content));
+                return;
             }
         }
     }

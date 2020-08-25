@@ -12,14 +12,21 @@ namespace AutomoderatorGameBot.Modules
     public class CopyPastaModule
     {
         private Faker Faker = new Faker();
-        private List<CopyPasta> _copyPastas { get; set; }
-        public IEnumerable<CopyPasta> CopyPastas => _copyPastas ?? LoadCopyPastas();
+        public List<CopyPasta> CopyPastas => LoadCopyPastas();
+        public List<VideoPasta> VideoPastas => LoadVideoPastas();
 
         private List<CopyPasta> LoadCopyPastas()
         {
             using var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Csv\\CopyPasta.csv"));
             using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
             return  csvReader.GetRecords<CopyPasta>().ToList();
+        }
+
+        private List<VideoPasta> LoadVideoPastas()
+        {
+            using var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Csv\\Videos.csv"));
+            using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+            return  csvReader.GetRecords<VideoPasta>().ToList();
         }
 
         public string GetWaffle()

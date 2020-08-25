@@ -206,6 +206,14 @@
       <Content Include="Pictures\Other\keira.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Videos\power_of_god.mp4" />
+      <Content Include="Videos\power_of_god.mp4">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Csv\Videos.csv" />
+      <Content Include="Csv\Videos.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
