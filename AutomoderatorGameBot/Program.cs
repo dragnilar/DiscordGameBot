@@ -71,7 +71,7 @@ namespace AutomoderatorGameBot
             var videoPasta = _copyPastaModule.VideoPastas.FirstOrDefault(x => x.Keyword == e.Message.Content.ToLower());
             if (videoPasta != null)
             {
-                await e.Message.RespondWithFileAsync(videoPasta.FilePath, "BEHOLD, THE POWER OF GOD");
+                await e.Message.RespondWithFileAsync(videoPasta.FilePath, videoPasta.Description);
                 return;
             }
 

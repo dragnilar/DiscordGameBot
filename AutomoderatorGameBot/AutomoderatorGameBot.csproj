@@ -214,6 +214,10 @@
       <Content Include="Csv\Videos.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Videos\gilbert.mp4" />
+      <Content Include="Videos\gilbert.mp4">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
