@@ -178,7 +178,7 @@ namespace AutomoderatorGameBot.Modules
                     var roll = faker.Random.Int(1, 100);
                     if (roll <= choice.FailResultChance)
                     {
-                        var loss = faker.Random.Long(100, 500) * roll;
+                        var loss = 100 * roll;
                         if (dbUser.PoopBucks < loss)
                         {
                             dbUser.PoopBucks = 0;
