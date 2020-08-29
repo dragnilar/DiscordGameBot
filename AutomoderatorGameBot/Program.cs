@@ -10,6 +10,8 @@ using Config.Net;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
+using DSharpPlus.Interactivity;
+using Microsoft.Extensions.Logging;
 
 namespace AutomoderatorGameBot
 {
@@ -22,6 +24,7 @@ namespace AutomoderatorGameBot
         private static ShittyVerseModule _shittyVerseModule;
         private static AmaModule _amaModule;
         private static IAutomoderatorGameBotBackEndConfig _config;
+        public static InteractivityExtension InteractivityExtension;
 
         private static void Main(string[] args)
         {
@@ -41,8 +44,8 @@ namespace AutomoderatorGameBot
             {
                 Token = _config.Token,
                 TokenType = TokenType.Bot,
-                UseInternalLogHandler = true,
-                LogLevel = LogLevel.Error
+                LoggerFactory = new LoggerFactory(),
+                MinimumLogLevel = LogLevel.Error
             });
             
             _discordClient.MessageCreated += async e => { await CheckForCannedResponses(e); };
@@ -55,6 +58,7 @@ namespace AutomoderatorGameBot
             _commandsNext.RegisterCommands<NamModule>();
             _commandsNext.RegisterCommands<ShittyVerseModule>();
             
+            InteractivityExtension = _discordClient.UseInteractivity(new InteractivityConfiguration());
             await _discordClient.ConnectAsync();
             await Task.Delay(-1);
         }
