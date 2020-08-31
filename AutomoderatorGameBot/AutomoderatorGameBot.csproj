@@ -4,8 +4,8 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <ApplicationIcon>GoogunkBot.ico</ApplicationIcon>
-        <AssemblyVersion>2020.0803.6.0</AssemblyVersion>
-        <FileVersion>2020.0803.6.0</FileVersion>
+        <AssemblyVersion>2020.0831.1.0</AssemblyVersion>
+        <FileVersion>2020.0831.1.0</FileVersion>
         <Configurations>Release;Debug</Configurations>
         <Platforms>x64</Platforms>
     </PropertyGroup>
@@ -56,6 +56,8 @@
       <None Remove="Pictures\Boxes\box7.jpg" />
       <None Remove="Pictures\Boxes\box8.jpg" />
       <None Remove="Pictures\Boxes\box9.jpg" />
+      <None Remove="Videos\ununun.mp4" />
+      <None Remove="Videos\youme.mp4" />
       <None Update="Csv\AmaStrings.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
@@ -216,6 +218,12 @@
       </Content>
       <None Remove="Videos\gilbert.mp4" />
       <Content Include="Videos\gilbert.mp4">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Videos\ununun.mp4">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Videos\youme.mp4">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>

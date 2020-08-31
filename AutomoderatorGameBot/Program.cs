@@ -47,17 +47,17 @@ namespace AutomoderatorGameBot
                 LoggerFactory = new LoggerFactory(),
                 MinimumLogLevel = LogLevel.Error
             });
-            
+
             _discordClient.MessageCreated += async e => { await CheckForCannedResponses(e); };
 
             _commandsNext = _discordClient.UseCommandsNext(new CommandsNextConfiguration
             {
-                StringPrefixes = new List<string>{"plz", "PLZ", "Plz"}
+                StringPrefixes = new List<string> {"plz", "PLZ", "Plz"}
             });
             _commandsNext.RegisterCommands<ShittyModule>();
             _commandsNext.RegisterCommands<NamModule>();
             _commandsNext.RegisterCommands<ShittyVerseModule>();
-            
+
             InteractivityExtension = _discordClient.UseInteractivity(new InteractivityConfiguration());
             await _discordClient.ConnectAsync();
             await Task.Delay(-1);
@@ -65,6 +65,7 @@ namespace AutomoderatorGameBot
 
         private static async Task CheckForCannedResponses(MessageCreateEventArgs e)
         {
+            if (e.Author == e.Client.CurrentUser) return;
             var copyPasta = _copyPastaModule.CopyPastas.FirstOrDefault(x => x.Command == e.Message.Content.ToLower());
             if (copyPasta != null)
             {
@@ -90,15 +91,12 @@ namespace AutomoderatorGameBot
                 case "keira":
                 case "keira knightly":
                     await e.Message.RespondWithFileAsync(Path.Combine(Environment.CurrentDirectory,
-                        $"Pictures\\Other\\keira.jpg"), TemporaryStrings.KeiraString);
+                        "Pictures\\Other\\keira.jpg"), TemporaryStrings.KeiraString);
                     return;
             }
 
             if (e.Message.Content.ToLower().EndsWith(" ama"))
-            {
                 await e.Message.RespondAsync(_amaModule.ConvertAmaString(e.Message.Content));
-                return;
-            }
         }
     }
 }
