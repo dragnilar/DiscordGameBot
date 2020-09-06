@@ -145,8 +145,9 @@ namespace AutomoderatorGameBot.Modules
                         "You need to get drafted and go to Nam with the maggots before you can do that, shit head.");
                     return;
                 }
-
-                var options = dbContext.MiniGameChoices.Where(x => x.MiniGameName == "SearchAndDestroy").ToList();
+                var faker = new Faker();
+                IList<MiniGameChoice> options = dbContext.MiniGameChoices.Where(x => x.MiniGameName == "SearchAndDestroy").ToList();
+                options = faker.Random.ListItems(options, 3);
                 var embed = new DiscordEmbedBuilder
                 {
                     Title = "Search And Destroy!",
@@ -173,8 +174,7 @@ namespace AutomoderatorGameBot.Modules
                             "That's not an option, shit head.");
                         return;
                     }
-
-                    var faker = new Faker();
+                    
                     var roll = faker.Random.Int(1, 100);
                     if (roll <= choice.FailResultChance)
                     {
