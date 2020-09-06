@@ -8,34 +8,31 @@ namespace AutomoderatorGameBot.BackEnd.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "CoolDownId",
-                table: "GameUsers",
-                type: "int",
+                "CoolDownId",
+                "GameUsers",
+                "int",
                 nullable: true);
 
             migrationBuilder.CreateTable(
-                name: "CoolDowns",
-                columns: table => new
+                "CoolDowns",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MineLastUsed = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    MineLastUsed = table.Column<DateTime>("datetime2", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CoolDowns", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_CoolDowns", x => x.Id); });
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameUsers_CoolDownId",
-                table: "GameUsers",
-                column: "CoolDownId");
+                "IX_GameUsers_CoolDownId",
+                "GameUsers",
+                "CoolDownId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_GameUsers_CoolDowns_CoolDownId",
-                table: "GameUsers",
-                column: "CoolDownId",
-                principalTable: "CoolDowns",
+                "FK_GameUsers_CoolDowns_CoolDownId",
+                "GameUsers",
+                "CoolDownId",
+                "CoolDowns",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -43,19 +40,19 @@ namespace AutomoderatorGameBot.BackEnd.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_GameUsers_CoolDowns_CoolDownId",
-                table: "GameUsers");
+                "FK_GameUsers_CoolDowns_CoolDownId",
+                "GameUsers");
 
             migrationBuilder.DropTable(
-                name: "CoolDowns");
+                "CoolDowns");
 
             migrationBuilder.DropIndex(
-                name: "IX_GameUsers_CoolDownId",
-                table: "GameUsers");
+                "IX_GameUsers_CoolDownId",
+                "GameUsers");
 
             migrationBuilder.DropColumn(
-                name: "CoolDownId",
-                table: "GameUsers");
+                "CoolDownId",
+                "GameUsers");
         }
     }
 }

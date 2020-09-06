@@ -9,6 +9,7 @@ using AutomoderatorGameBot.Singletons;
 using Config.Net;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using Microsoft.Extensions.Logging;
@@ -25,6 +26,7 @@ namespace AutomoderatorGameBot
         private static AmaModule _amaModule;
         private static IAutomoderatorGameBotBackEndConfig _config;
         public static InteractivityExtension InteractivityExtension;
+        private static ReactionModule _reactionModule;
 
         private static void Main(string[] args)
         {
@@ -32,6 +34,7 @@ namespace AutomoderatorGameBot
                 .UseJsonConfig()
                 .Build();
             _copyPastaModule = new CopyPastaModule();
+            _reactionModule = new ReactionModule();
             _amaModule = new AmaModule();
             _namModule = new NamModule();
             _shittyVerseModule = new ShittyVerseModule();
@@ -66,6 +69,15 @@ namespace AutomoderatorGameBot
         private static async Task CheckForCannedResponses(MessageCreateEventArgs e)
         {
             if (e.Author == e.Client.CurrentUser) return;
+
+            var reaction = _reactionModule.GetReactions()
+                .FirstOrDefault(x => e.Message.Content.ToLower().Contains(x.ReactKeyword));
+            if (reaction != null)
+            {
+                var emoji = DiscordEmoji.FromName(_discordClient, reaction.ReactionEmojiCode);
+                await e.Message.CreateReactionAsync(emoji);
+            }
+
             var copyPasta = _copyPastaModule.CopyPastas.FirstOrDefault(x => x.Command == e.Message.Content.ToLower());
             if (copyPasta != null)
             {

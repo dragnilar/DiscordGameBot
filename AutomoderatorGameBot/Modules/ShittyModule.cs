@@ -1,21 +1,14 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Bogus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.Entities;
-using AutomoderatorGameBot.BackEnd.DbContexts;
-using AutomoderatorGameBot.BackEnd.Models;
-using AutomoderatorGameBot.Properties;
 
 namespace AutomoderatorGameBot.Modules
 {
     public class ShittyModule : BaseCommandModule
     {
-
         [Command("box")]
         [Description("Gives you a random picture of a lovely cardboard box.")]
         public async Task Box(CommandContext ctx)
@@ -57,10 +50,12 @@ namespace AutomoderatorGameBot.Modules
                         $"I am {faker.Person.FullName},  the inventor of the  {faker.Commerce.ProductName()}, which is {faker.Commerce.ProductDescription()}. AMA! ");
                     break;
                 case 2:
-                    await ctx.RespondAsync($"I am {faker.Rant.Review("penis")}, I ate a human {faker.Hacker.Noun()}. AMA! ");
+                    await ctx.RespondAsync(
+                        $"I am {faker.Rant.Review("penis")}, I ate a human {faker.Hacker.Noun()}. AMA! ");
                     break;
                 default:
-                    await ctx.RespondAsync($"{faker.Hacker.Phrase()}, you won't fuck-{faker.Hacker.IngVerb()} touch my {faker.System.FileName()}. AMA! ");
+                    await ctx.RespondAsync(
+                        $"{faker.Hacker.Phrase()}, you won't fuck-{faker.Hacker.IngVerb()} touch my {faker.System.FileName()}. AMA! ");
                     break;
             }
         }

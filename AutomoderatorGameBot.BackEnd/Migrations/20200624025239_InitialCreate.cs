@@ -8,52 +8,49 @@ namespace AutomoderatorGameBot.BackEnd.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "GameUsers",
-                columns: table => new
+                "GameUsers",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DiscordUserId = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
-                    DateTimeAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DiscordUserId = table.Column<decimal>("decimal(20,0)", nullable: false),
+                    DateTimeAdded = table.Column<DateTime>("datetime2", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GameUsers", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_GameUsers", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "DraftedUsers",
-                columns: table => new
+                "DraftedUsers",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GameUserId = table.Column<int>(type: "int", nullable: false),
-                    DraftDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    GameUserId = table.Column<int>("int", nullable: false),
+                    DraftDateTime = table.Column<DateTime>("datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DraftedUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DraftedUsers_GameUsers_GameUserId",
-                        column: x => x.GameUserId,
-                        principalTable: "GameUsers",
-                        principalColumn: "Id",
+                        "FK_DraftedUsers_GameUsers_GameUserId",
+                        x => x.GameUserId,
+                        "GameUsers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DraftedUsers_GameUserId",
-                table: "DraftedUsers",
-                column: "GameUserId");
+                "IX_DraftedUsers_GameUserId",
+                "DraftedUsers",
+                "GameUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DraftedUsers");
+                "DraftedUsers");
 
             migrationBuilder.DropTable(
-                name: "GameUsers");
+                "GameUsers");
         }
     }
 }

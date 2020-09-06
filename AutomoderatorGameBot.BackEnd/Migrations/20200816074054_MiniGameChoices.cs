@@ -7,16 +7,16 @@ namespace AutomoderatorGameBot.BackEnd.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<long>(
-                name: "Price",
-                table: "Items",
-                type: "bigint",
+                "Price",
+                "Items",
+                "bigint",
                 nullable: false,
                 defaultValue: 0L);
 
             migrationBuilder.AddColumn<long>(
-                name: "SellPrice",
-                table: "Items",
-                type: "bigint",
+                "SellPrice",
+                "Items",
+                "bigint",
                 nullable: false,
                 defaultValue: 0L);
         }
@@ -24,12 +24,12 @@ namespace AutomoderatorGameBot.BackEnd.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Price",
-                table: "Items");
+                "Price",
+                "Items");
 
             migrationBuilder.DropColumn(
-                name: "SellPrice",
-                table: "Items");
+                "SellPrice",
+                "Items");
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutomoderatorGameBot.BackEnd.DbContexts;
 using AutomoderatorGameBot.BackEnd.Models;
@@ -53,10 +52,7 @@ namespace AutomoderatorGameBot.Modules
             {
                 var member = members.FirstOrDefault(x => x.Key == player.DiscordUserId);
                 if (member.Value != null)
-                {
                     embed.AddField($"{member.Value.Username}", $"Draft Date: {player.DateTimeAdded:f}");
-                }
-
             }
 
 
@@ -67,7 +63,6 @@ namespace AutomoderatorGameBot.Modules
         [Description("Navigate the mine fields for glory and poop bucks.")]
         public async Task MineFields(CommandContext ctx)
         {
-
             var player = await GameUtils.GetGameUser(ctx.Member.Id).ConfigureAwait(false);
             if (player == null)
             {
@@ -79,7 +74,7 @@ namespace AutomoderatorGameBot.Modules
                 await using var dbContext = new GameDbContext();
                 var dbUser = dbContext.GameUsers.FirstOrDefault(x => x.Id == player.Id);
                 if (dbUser == null)
-                {     
+                {
                     await ctx.RespondAsync(
                         "You need to get drafted and go to Nam with the maggots before you can do that, shit head.");
                     return;
@@ -88,12 +83,13 @@ namespace AutomoderatorGameBot.Modules
                 dbUser.CoolDown ??= new CoolDown();
 
                 var secondsSinceLastMine = (DateTime.Now - dbUser.CoolDown.MineLastUsed).TotalSeconds;
-                if ( secondsSinceLastMine < 30)
+                if (secondsSinceLastMine < 30)
                 {
                     await ctx.RespondAsync(
-                        $"You just went out into the mine fields not too long ago shit head, give yourself {(30 - secondsSinceLastMine):N2} seconds to get bandaged up!");
+                        $"You just went out into the mine fields not too long ago shit head, give yourself {30 - secondsSinceLastMine:N2} seconds to get bandaged up!");
                     return;
                 }
+
                 dbUser.CoolDown.MineLastUsed = DateTime.Now;
                 var faker = new Faker();
                 var roll = faker.Random.Int(1, 100);
@@ -101,13 +97,9 @@ namespace AutomoderatorGameBot.Modules
                 {
                     var loss = faker.Random.Long(100, 500) * roll;
                     if (dbUser.PoopBucks < loss)
-                    {
                         dbUser.PoopBucks = 0;
-                    }
                     else
-                    {
                         dbUser.PoopBucks -= loss;
-                    }
 
                     await dbContext.SaveChangesAsync();
                     await ctx.RespondAsync(
@@ -140,13 +132,15 @@ namespace AutomoderatorGameBot.Modules
                 await using var dbContext = new GameDbContext();
                 var dbUser = dbContext.GameUsers.FirstOrDefault(x => x.Id == player.Id);
                 if (dbUser == null)
-                {     
+                {
                     await ctx.RespondAsync(
                         "You need to get drafted and go to Nam with the maggots before you can do that, shit head.");
                     return;
                 }
+
                 var faker = new Faker();
-                IList<MiniGameChoice> options = dbContext.MiniGameChoices.Where(x => x.MiniGameName == "SearchAndDestroy").ToList();
+                IList<MiniGameChoice> options =
+                    dbContext.MiniGameChoices.Where(x => x.MiniGameName == "SearchAndDestroy").ToList();
                 options = faker.Random.ListItems(options, 3);
                 var embed = new DiscordEmbedBuilder
                 {
@@ -156,10 +150,10 @@ namespace AutomoderatorGameBot.Modules
                 var choiceNumber = 1;
                 foreach (var option in options)
                 {
-                    
                     embed.AddField($"{option.ChoiceName}", "*", true);
                     choiceNumber++;
                 }
+
                 await ctx.RespondAsync("", embed: embed);
                 while (DateTime.Now < DateTime.Now.AddSeconds(120))
                 {
@@ -167,45 +161,37 @@ namespace AutomoderatorGameBot.Modules
                     var playerInput = await interactivity.WaitForMessageAsync(x => x.Author.Id == dbUser.DiscordUserId);
                     if (playerInput.Result == null) continue;
                     var lowerInput = playerInput.Result.Content.ToLower();
-                    var choice = options.FirstOrDefault(x => x.ChoiceName == lowerInput );
+                    var choice = options.FirstOrDefault(x => x.ChoiceName == lowerInput);
                     if (choice == null)
                     {
                         await ctx.RespondAsync(
                             "That's not an option, shit head.");
                         return;
                     }
-                    
+
                     var roll = faker.Random.Int(1, 100);
                     if (roll <= choice.FailResultChance)
                     {
                         var loss = 100 * roll;
                         if (dbUser.PoopBucks < loss)
-                        {
                             dbUser.PoopBucks = 0;
-                        }
                         else
-                        {
                             dbUser.PoopBucks -= loss;
-                        }
                         await dbContext.SaveChangesAsync();
                         await ctx.RespondAsync($"{choice.FailResultText} {loss}");
                         return;
                     }
-                    else
-                    {
-                        dbUser.PoopBucks += choice.RegularResultMoney;
-                        await dbContext.SaveChangesAsync();
-                        await ctx.RespondAsync(
-                            $"{choice.RegularResultText} ${choice.RegularResultMoney.ToString()}");
-                        return;
-                    }
 
-
+                    dbUser.PoopBucks += choice.RegularResultMoney;
+                    await dbContext.SaveChangesAsync();
+                    await ctx.RespondAsync(
+                        $"{choice.RegularResultText} ${choice.RegularResultMoney.ToString()}");
+                    return;
                 }
+
                 await ctx.RespondAsync(
                     "Look shit head, don't waste Sarge's time, he doesn't like it when you sit on your ass and do nothing.");
             }
         }
-        
     }
 }

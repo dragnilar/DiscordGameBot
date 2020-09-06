@@ -11,7 +11,7 @@ namespace AutomoderatorGameBot.Modules
 {
     public class CopyPastaModule
     {
-        private Faker Faker = new Faker();
+        private readonly Faker Faker = new Faker();
         public List<CopyPasta> CopyPastas => LoadCopyPastas();
         public List<VideoPasta> VideoPastas => LoadVideoPastas();
 
@@ -19,14 +19,14 @@ namespace AutomoderatorGameBot.Modules
         {
             using var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Csv\\CopyPasta.csv"));
             using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
-            return  csvReader.GetRecords<CopyPasta>().ToList();
+            return csvReader.GetRecords<CopyPasta>().ToList();
         }
 
         private List<VideoPasta> LoadVideoPastas()
         {
             using var reader = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Csv\\Videos.csv"));
             using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
-            return  csvReader.GetRecords<VideoPasta>().ToList();
+            return csvReader.GetRecords<VideoPasta>().ToList();
         }
 
         public string GetWaffle()

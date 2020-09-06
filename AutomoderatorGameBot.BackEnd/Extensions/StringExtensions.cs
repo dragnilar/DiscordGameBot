@@ -9,14 +9,16 @@ namespace AutomoderatorGameBot.BackEnd.Extensions
             var indexOfFoundText = text.IndexOf(stringToReplace, StringComparison.Ordinal);
             if (indexOfFoundText < 0)
                 return text;
-            return text.Substring(0, indexOfFoundText) + replacementStringValue + text.Substring(indexOfFoundText + stringToReplace.Length);
+            return text.Substring(0, indexOfFoundText) + replacementStringValue +
+                   text.Substring(indexOfFoundText + stringToReplace.Length);
         }
-        
-        public static string ReplaceLastOccurrence(this string text, string stringToReplace, string replacementStringValue)
+
+        public static string ReplaceLastOccurrence(this string text, string stringToReplace,
+            string replacementStringValue)
         {
             var place = text.LastIndexOf(stringToReplace, StringComparison.Ordinal);
 
-            if(place == -1)
+            if (place == -1)
                 return text;
 
             var result = text.Remove(place, stringToReplace.Length).Insert(place, replacementStringValue);

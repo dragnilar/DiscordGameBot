@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AutomoderatorGameBot.BackEnd.Models
+﻿namespace AutomoderatorGameBot.BackEnd.Models
 {
     public class Item
     {

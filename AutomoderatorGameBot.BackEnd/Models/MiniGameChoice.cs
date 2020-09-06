@@ -15,7 +15,5 @@
         public int FailResultChance { get; set; }
         public int? SpecialRewardId { get; set; }
         public virtual Item SpecialReward { get; set; }
-        
-        
     }
 }

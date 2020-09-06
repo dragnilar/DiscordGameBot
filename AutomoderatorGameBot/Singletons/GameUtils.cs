@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutomoderatorGameBot.BackEnd.DbContexts;
 using AutomoderatorGameBot.BackEnd.Models;
@@ -11,7 +8,6 @@ namespace AutomoderatorGameBot.Singletons
 {
     public static class GameUtils
     {
-
         public static async Task<GameUser> AddNewUser(GameUser newUser)
         {
             await using var dbContext = new GameDbContext();
@@ -34,8 +30,5 @@ namespace AutomoderatorGameBot.Singletons
             var gameUser = await dbContext.GameUsers.FirstOrDefaultAsync(x => x.DiscordUserId == discordId);
             return gameUser;
         }
-
-
-
     }
 }
