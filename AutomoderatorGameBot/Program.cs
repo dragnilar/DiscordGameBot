@@ -70,13 +70,7 @@ namespace AutomoderatorGameBot
         {
             if (e.Author == e.Client.CurrentUser) return;
 
-            var reaction = _reactionModule.GetReactions()
-                .FirstOrDefault(x => e.Message.Content.ToLower().Contains(x.ReactKeyword));
-            if (reaction != null)
-            {
-                var emoji = DiscordEmoji.FromName(_discordClient, reaction.ReactionEmojiCode);
-                await e.Message.CreateReactionAsync(emoji);
-            }
+            await _reactionModule.ProcessReactions(e, _discordClient);
 
             var copyPasta = _copyPastaModule.CopyPastas.FirstOrDefault(x => x.Command == e.Message.Content.ToLower());
             if (copyPasta != null)
