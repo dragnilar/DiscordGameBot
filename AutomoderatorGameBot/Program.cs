@@ -88,9 +88,6 @@ namespace AutomoderatorGameBot
 
             switch (e.Message.Content.ToLower())
             {
-                case "fuck you bot":
-                    await e.Message.RespondAsync(_copyPastaModule.GetWaffle());
-                    return;
                 case "k ama":
                     await e.Message.RespondAsync("k");
                     return;

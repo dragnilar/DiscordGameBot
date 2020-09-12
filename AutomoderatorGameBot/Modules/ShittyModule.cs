@@ -37,6 +37,7 @@ namespace AutomoderatorGameBot.Modules
         }
 
         [Command("shittyama")]
+        [Description("Create a random shitty ama topic.")]
         public async Task ShittyAma(CommandContext ctx)
         {
             var faker = new Faker();
@@ -58,6 +59,15 @@ namespace AutomoderatorGameBot.Modules
                         $"{faker.Hacker.Phrase()}, you won't fuck-{faker.Hacker.IngVerb()} touch my {faker.System.FileName()}. AMA! ");
                     break;
             }
+        }
+
+        [Command("randombs")]
+        [Description("Gives you a bunch of random bullshit text.")]
+        public async Task RandomBs(CommandContext ctx)
+        {
+            var faker = new Faker();
+            var waffle = faker.WaffleText(faker.Random.Int(1, 3));
+            await ctx.RespondAsync(waffle);
         }
     }
 }

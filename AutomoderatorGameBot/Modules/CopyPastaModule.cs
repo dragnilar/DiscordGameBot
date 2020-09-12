@@ -11,7 +11,6 @@ namespace AutomoderatorGameBot.Modules
 {
     public class CopyPastaModule
     {
-        private readonly Faker Faker = new Faker();
         public List<CopyPasta> CopyPastas => LoadCopyPastas();
         public List<VideoPasta> VideoPastas => LoadVideoPastas();
 
@@ -28,10 +27,6 @@ namespace AutomoderatorGameBot.Modules
             using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
             return csvReader.GetRecords<VideoPasta>().ToList();
         }
-
-        public string GetWaffle()
-        {
-            return Faker.WaffleText(Faker.Random.Int(1, 3));
-        }
+        
     }
 }
