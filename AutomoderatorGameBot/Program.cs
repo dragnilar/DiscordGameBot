@@ -72,30 +72,14 @@ namespace AutomoderatorGameBot
 
             await _reactionModule.ProcessReactions(e, _discordClient);
 
-            var copyPasta = _copyPastaModule.CopyPastas.FirstOrDefault(x => x.Command == e.Message.Content.ToLower());
-            if (copyPasta != null)
-            {
-                await e.Message.RespondAsync(copyPasta.Pasta);
-                return;
-            }
-
+            var copyPastaRun = await _copyPastaModule.ProcessCopyPastas(e);
+            if (copyPastaRun) return;
+            
             var videoPasta = _copyPastaModule.VideoPastas.FirstOrDefault(x => x.Keyword == e.Message.Content.ToLower());
             if (videoPasta != null)
             {
                 await e.Message.RespondWithFileAsync(videoPasta.FilePath, videoPasta.Description);
                 return;
-            }
-
-            switch (e.Message.Content.ToLower())
-            {
-                case "k ama":
-                    await e.Message.RespondAsync("k");
-                    return;
-                case "keira":
-                case "keira knightly":
-                    await e.Message.RespondWithFileAsync(Path.Combine(Environment.CurrentDirectory,
-                        "Pictures\\Other\\keira.jpg"), TemporaryStrings.KeiraString);
-                    return;
             }
 
             if (e.Message.Content.ToLower().EndsWith(" ama"))
