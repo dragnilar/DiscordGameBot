@@ -230,6 +230,10 @@
       <Content Include="Csv\Reactions.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Pictures\Other\ramranch.jpg" />
+      <Content Include="Pictures\Other\ramranch.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
