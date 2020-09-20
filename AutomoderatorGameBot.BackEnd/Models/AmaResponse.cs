@@ -3,9 +3,8 @@
 namespace AutomoderatorGameBot.BackEnd.Models
 {
     [NotMapped]
-    public class AmaTransformer
+    public class AmaResponse
     {
-        public string InValue { get; set; }
-        public string OutValue { get; set; }
+        public string Response { get; set; }
     }
 }

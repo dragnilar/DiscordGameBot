@@ -83,7 +83,7 @@ namespace AutomoderatorGameBot
             }
 
             if (e.Message.Content.ToLower().EndsWith(" ama"))
-                await e.Message.RespondAsync(_amaModule.ConvertAmaString(e.Message.Content));
+                await _amaModule.ProcessReactions(e);
         }
     }
 }
