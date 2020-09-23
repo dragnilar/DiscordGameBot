@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutomoderatorGameBot.BackEnd.Models;
-using Bogus;
 using CsvHelper;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 
 namespace AutomoderatorGameBot.Modules
@@ -50,19 +50,29 @@ namespace AutomoderatorGameBot.Modules
 
         }
 
-        [Command("Copypasta")]
+        [Command("copypasta")]
         [Description(
             "Lists all of the copy pasta key word triggers that you can accidentally or purposefully trigger.")]
         public async Task CopyPastaHelp(CommandContext ctx)
         {
             var builder = new StringBuilder();
-
-            foreach (var copyPasta in CopyPastas)
+            var copyPastas = CopyPastas;
+            for (var i = 0; i < copyPastas.Count; i++)
             {
-                builder.Append(copyPasta.Command + "\n");
+                builder.Append(copyPastas[i].Command);
+                if (i != copyPastas.Count - 1)
+                {
+                    builder.Append(", ");
+                }
             }
-
-            await ctx.RespondAsync(builder.ToString());
+            var embed = new DiscordEmbedBuilder
+            {
+                Title = "Copy Pastas",
+                Color = new Optional<DiscordColor>(DiscordColor.DarkGreen),
+                Description = "These are the available shitty copy pasta triggers that you may trigger:"
+            };
+            embed.AddField("Key Words", builder.ToString());
+            await ctx.RespondAsync(null, false, embed.Build());
         }
 
     }
