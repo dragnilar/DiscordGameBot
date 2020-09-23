@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutomoderatorGameBot.BackEnd.Models;
 using Bogus;
 using CsvHelper;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.EventArgs;
 
 namespace AutomoderatorGameBot.Modules
 {
-    public class CopyPastaModule
+    public class CopyPastaModule : BaseCommandModule
     {
         public List<CopyPasta> CopyPastas => LoadCopyPastas();
         public List<VideoPasta> VideoPastas => LoadVideoPastas();
@@ -46,6 +49,21 @@ namespace AutomoderatorGameBot.Modules
             return true;
 
         }
-        
+
+        [Command("Copypasta")]
+        [Description(
+            "Lists all of the copy pasta key word triggers that you can accidentally or purposefully trigger.")]
+        public async Task CopyPastaHelp(CommandContext ctx)
+        {
+            var builder = new StringBuilder();
+
+            foreach (var copyPasta in CopyPastas)
+            {
+                builder.Append(copyPasta.Command + "\n");
+            }
+
+            await ctx.RespondAsync(builder.ToString());
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutomoderatorGameBot.BackEnd.Extensions;
 using AutomoderatorGameBot.BackEnd.Models;
@@ -28,8 +29,12 @@ namespace AutomoderatorGameBot.Modules
             var reactions = GetResponses().ToList();
             if (!reactions.Any()) return;
             var faker = new Faker();
-            var response = faker.Random.ListItem(reactions);
-            await e.Message.RespondAsync(response.Response);
+            var responseBuilder = new StringBuilder();
+            for (var i = 0; i < 4; i++)
+            {
+                responseBuilder.Append(faker.Random.ListItem(reactions).Response + "\n");
+            }
+            await e.Message.RespondAsync(responseBuilder.ToString());
         }
     }
 }

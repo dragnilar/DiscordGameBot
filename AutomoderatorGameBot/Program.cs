@@ -60,6 +60,7 @@ namespace AutomoderatorGameBot
             _commandsNext.RegisterCommands<ShittyModule>();
             _commandsNext.RegisterCommands<NamModule>();
             _commandsNext.RegisterCommands<ShittyVerseModule>();
+            _commandsNext.RegisterCommands<CopyPastaModule>();
 
             InteractivityExtension = _discordClient.UseInteractivity(new InteractivityConfiguration());
             await _discordClient.ConnectAsync();
