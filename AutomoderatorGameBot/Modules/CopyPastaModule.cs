@@ -59,6 +59,7 @@ namespace AutomoderatorGameBot.Modules
             var copyPastas = CopyPastas;
             for (var i = 0; i < copyPastas.Count; i++)
             {
+                if (!copyPastas[i].VisibleInHelp) continue;
                 builder.Append(copyPastas[i].Command);
                 if (i != copyPastas.Count - 1)
                 {

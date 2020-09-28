@@ -8,5 +8,6 @@ namespace AutomoderatorGameBot.BackEnd.Models
         public string Command { get; set; }
         public string Pasta { get; set; }
         public string OptionalPicture { get; set; }
+        public bool VisibleInHelp { get; set; }
     }
 }
