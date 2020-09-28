@@ -61,7 +61,7 @@ namespace AutomoderatorGameBot.Modules
         }
 
         [Command("mine")]
-        [Description("Navigate the mine fields for glory and poop bucks.")]
+        [Description("Make a run through the mine field to amuse the Sarge without getting blown up.")]
         public async Task MineFields(CommandContext ctx)
         {
             var player = await GameUtils.GetGameUser(ctx.Member.Id).ConfigureAwait(false);
@@ -97,22 +97,22 @@ namespace AutomoderatorGameBot.Modules
                 if (roll <= 20)
                 {
                     var loss = faker.Random.Long(100, 500) * roll;
-                    if (dbUser.PoopBucks < loss)
-                        dbUser.PoopBucks = 0;
+                    if (dbUser.ShitCoins < loss)
+                        dbUser.ShitCoins = 0;
                     else
-                        dbUser.PoopBucks -= loss;
+                        dbUser.ShitCoins -= loss;
 
                     await dbContext.SaveChangesAsync();
                     await ctx.RespondAsync(
-                        $"You stepped on a land mine and died! You lost {loss} poop bucks.");
+                        $"You stepped on a land mine and died! You lost {loss} Shit Coins.");
                 }
                 else
                 {
                     var gain = faker.Random.Long(10, 50) * roll;
-                    dbUser.PoopBucks += gain;
+                    dbUser.ShitCoins += gain;
                     await dbContext.SaveChangesAsync();
                     await ctx.RespondAsync(
-                        $"You and the maggots managed to make it through the mine field and killed some gooks! You got ${gain} Poop Bucks!");
+                        $"You and the maggots managed to make it through the mine field and killed some gooks! You got ${gain} Shit Coins!");
                 }
             }
         }
@@ -175,10 +175,10 @@ namespace AutomoderatorGameBot.Modules
                     if (roll <= choice.FailResultChance)
                     {
                         var loss = 100 * roll;
-                        if (dbUser.PoopBucks < loss)
-                            dbUser.PoopBucks = 0;
+                        if (dbUser.ShitCoins < loss)
+                            dbUser.ShitCoins = 0;
                         else
-                            dbUser.PoopBucks -= loss;
+                            dbUser.ShitCoins -= loss;
                         await dbContext.SaveChangesAsync();
                         await ctx.RespondAsync($"{choice.FailResultText} {loss}");
                         return;
@@ -186,14 +186,14 @@ namespace AutomoderatorGameBot.Modules
 
                     if (roll > choice.RegularResultChance)
                     {
-                        dbUser.PoopBucks += choice.SpecialResultMoney;
+                        dbUser.ShitCoins += choice.SpecialResultMoney;
                         await dbContext.SaveChangesAsync();
                         await ctx.RespondAsync(
                             $"{choice.RegularResultText} ${choice.SpecialResultText.ToString()}");
                     }
                     else
                     {
-                        dbUser.PoopBucks += choice.RegularResultMoney;
+                        dbUser.ShitCoins += choice.RegularResultMoney;
                         await dbContext.SaveChangesAsync();
                         await ctx.RespondAsync(
                             $"{choice.RegularResultText} ${choice.RegularResultMoney.ToString()}");

@@ -237,8 +237,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Bogus" Version="30.0.1-beta-3" />
-      <PackageReference Include="CsvHelper" Version="15.0.5" />
+      <PackageReference Include="Bogus" Version="31.0.2" />
+      <PackageReference Include="CsvHelper" Version="15.0.6" />
       <PackageReference Include="DSharpPlus" Version="4.0.0-nightly-00719" />
       <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.0-nightly-00719" />
       <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.0-nightly-00719" />

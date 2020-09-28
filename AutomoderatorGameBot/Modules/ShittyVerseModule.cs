@@ -15,15 +15,14 @@ namespace AutomoderatorGameBot.Modules
             if (player == null)
             {
                 await ctx.RespondAsync(
-                    "You need to get drafted and go to Nam with the Poop Balls before you can do that, shit head.");
+                    "You need to get drafted and go to Nam with the privates before you can do that buddy.");
             }
             else
             {
                 var embed = new DiscordEmbedBuilder();
                 embed.Title = $"{ctx.Member.Nickname}'s Balance";
-                embed.Description = "This is your current balance of poop bucks and shit bucks.";
-                embed.AddField("Poop Bucks", $"{player.PoopBucks}");
-                embed.AddField("Shit Bucks", $"{player.ShitBucks}");
+                embed.Description = "This is your current balance of shit coins.";
+                embed.AddField("Shit Coins", $"{player.ShitCoins:C2}");
 
                 await ctx.RespondAsync("", embed: embed);
             }
