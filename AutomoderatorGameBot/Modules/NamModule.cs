@@ -167,12 +167,12 @@ namespace AutomoderatorGameBot.Modules
                     if (choice == null)
                     {
                         await ctx.RespondAsync(
-                            "That's not an option, shit head.");
+                            "That's not an option private!");
                         return;
                     }
 
                     var roll = faker.Random.Int(1, 100);
-                    if (roll < choice.RegularResultChance)
+                    if (roll <= choice.FailResultChance)
                     {
                         var loss = 100 * roll;
                         if (dbUser.ShitCoins < loss)
@@ -180,7 +180,7 @@ namespace AutomoderatorGameBot.Modules
                         else
                             dbUser.ShitCoins -= loss;
                         await dbContext.SaveChangesAsync();
-                        await ctx.RespondAsync($"{choice.FailResultText} {loss}");
+                        await ctx.RespondAsync($"{choice.FailResultText} {loss:C2}");
                         return;
                     }
 
@@ -189,14 +189,14 @@ namespace AutomoderatorGameBot.Modules
                         dbUser.ShitCoins += choice.SpecialResultMoney;
                         await dbContext.SaveChangesAsync();
                         await ctx.RespondAsync(
-                            $"{choice.SpecialResultText} ${choice.SpecialResultMoney.ToString()}");
+                            $"{choice.SpecialResultText} {choice.SpecialResultMoney:C2}");
                     }
                     else
                     {
                         dbUser.ShitCoins += choice.RegularResultMoney;
                         await dbContext.SaveChangesAsync();
                         await ctx.RespondAsync(
-                            $"{choice.RegularResultText} ${choice.RegularResultMoney.ToString()}");
+                            $"{choice.RegularResultText} {choice.RegularResultMoney:C2}");
                     }
 
                     return;
