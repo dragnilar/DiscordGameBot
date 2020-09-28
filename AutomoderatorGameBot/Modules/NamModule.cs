@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutomoderatorGameBot.BackEnd.DbContexts;
 using AutomoderatorGameBot.BackEnd.Models;
@@ -148,12 +149,13 @@ namespace AutomoderatorGameBot.Modules
                     Description = $"Pick a search and destroy mission, {ctx.Member.DisplayName}!"
                 };
                 var choiceNumber = 1;
+                var optionsBuilder = new StringBuilder();
                 foreach (var option in options)
                 {
-                    embed.AddField($"{option.ChoiceName}", "*", true);
+                    optionsBuilder.Append(" *" + option.ChoiceName + "* ");
                     choiceNumber++;
                 }
-
+                embed.AddField("Missions", optionsBuilder.ToString(), true);
                 await ctx.RespondAsync("", embed: embed);
                 while (DateTime.Now < DateTime.Now.AddSeconds(120))
                 {
@@ -182,10 +184,21 @@ namespace AutomoderatorGameBot.Modules
                         return;
                     }
 
-                    dbUser.PoopBucks += choice.RegularResultMoney;
-                    await dbContext.SaveChangesAsync();
-                    await ctx.RespondAsync(
-                        $"{choice.RegularResultText} ${choice.RegularResultMoney.ToString()}");
+                    if (roll > choice.RegularResultChance)
+                    {
+                        dbUser.PoopBucks += choice.SpecialResultMoney;
+                        await dbContext.SaveChangesAsync();
+                        await ctx.RespondAsync(
+                            $"{choice.RegularResultText} ${choice.SpecialResultText.ToString()}");
+                    }
+                    else
+                    {
+                        dbUser.PoopBucks += choice.RegularResultMoney;
+                        await dbContext.SaveChangesAsync();
+                        await ctx.RespondAsync(
+                            $"{choice.RegularResultText} ${choice.RegularResultMoney.ToString()}");
+                    }
+
                     return;
                 }
 
