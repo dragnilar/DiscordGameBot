@@ -172,7 +172,7 @@ namespace AutomoderatorGameBot.Modules
                     }
 
                     var roll = faker.Random.Int(1, 100);
-                    if (roll <= choice.FailResultChance)
+                    if (roll < choice.RegularResultChance)
                     {
                         var loss = 100 * roll;
                         if (dbUser.ShitCoins < loss)
@@ -189,7 +189,7 @@ namespace AutomoderatorGameBot.Modules
                         dbUser.ShitCoins += choice.SpecialResultMoney;
                         await dbContext.SaveChangesAsync();
                         await ctx.RespondAsync(
-                            $"{choice.RegularResultText} ${choice.SpecialResultText.ToString()}");
+                            $"{choice.SpecialResultText} ${choice.SpecialResultMoney.ToString()}");
                     }
                     else
                     {
