@@ -61,6 +61,9 @@
       <None Update="Csv\AmaStrings.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Csv\CopyPasta.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
       <None Update="Videos\a.mp4">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
