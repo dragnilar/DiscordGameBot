@@ -61,12 +61,12 @@
       <None Update="Csv\AmaStrings.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Videos\a.mp4">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Csv\CopyPasta.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <Content Include="Pictures\Boxes\box1.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
@@ -202,7 +202,6 @@
       <Content Include="Pictures\Boxes\box9.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <None Remove="Csv\CopyPasta.csv" />
       <None Remove="Csv\CopyPasta.xlsx" />
       <None Remove="Pictures\Other\keira.jpg" />
       <Content Include="Pictures\Other\keira.jpg">
