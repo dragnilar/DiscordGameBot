@@ -32,22 +32,27 @@ namespace AutomoderatorGameBot.Modules
             using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
             return csvReader.GetRecords<VideoPasta>().ToList();
         }
-        
+
         public async Task<bool> ProcessCopyPastas(MessageCreateEventArgs e)
         {
             var copyPasta = CopyPastas.FirstOrDefault(x => x.Command == e.Message.Content.ToLower());
             if (copyPasta == null) return false;
             if (!string.IsNullOrWhiteSpace(copyPasta.OptionalPicture))
-            {
-                await e.Message.RespondWithFileAsync(
-                    Path.Combine(Environment.CurrentDirectory, copyPasta.OptionalPicture), copyPasta.Pasta);
-            }
+                switch (copyPasta.Pasta.ToLower())
+                {
+                    case "no text":
+                        await e.Message.RespondWithFileAsync(
+                            Path.Combine(Environment.CurrentDirectory, copyPasta.OptionalPicture), string.Empty);
+                        break;
+                    default:
+                        await e.Message.RespondWithFileAsync(
+                            Path.Combine(Environment.CurrentDirectory, copyPasta.OptionalPicture), copyPasta.Pasta);
+                        break;
+                }
             else
-            {
                 await e.Message.RespondAsync(copyPasta.Pasta);
-            }
-            return true;
 
+            return true;
         }
 
         [Command("copypasta")]
@@ -61,11 +66,9 @@ namespace AutomoderatorGameBot.Modules
             {
                 if (!copyPastas[i].VisibleInHelp) continue;
                 builder.Append(copyPastas[i].Command);
-                if (i != copyPastas.Count - 1)
-                {
-                    builder.Append(", ");
-                }
+                if (i != copyPastas.Count - 1) builder.Append(", ");
             }
+
             var embed = new DiscordEmbedBuilder
             {
                 Title = "Copy Pastas",
@@ -75,6 +78,5 @@ namespace AutomoderatorGameBot.Modules
             embed.AddField("Key Words", builder.ToString());
             await ctx.RespondAsync(null, false, embed.Build());
         }
-
     }
 }
