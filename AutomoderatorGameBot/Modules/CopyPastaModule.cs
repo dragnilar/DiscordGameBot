@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutomoderatorGameBot.BackEnd.DbContexts;
 using AutomoderatorGameBot.BackEnd.Models;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using CsvHelper;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
@@ -37,6 +39,10 @@ namespace AutomoderatorGameBot.Modules
         {
             var copyPasta = CopyPastas.FirstOrDefault(x => x.Command == e.Message.Content.ToLower());
             if (copyPasta == null) return false;
+            if (ShutUp(copyPasta.ShutUp))
+            {
+                return true;
+            }
             if (!string.IsNullOrWhiteSpace(copyPasta.OptionalPicture))
                 switch (copyPasta.Pasta.ToLower())
                 {
@@ -53,6 +59,68 @@ namespace AutomoderatorGameBot.Modules
                 await e.Message.RespondAsync(copyPasta.Pasta);
 
             return true;
+        }
+
+        private bool ShutUp(bool usedShutUp)
+        {
+            using var db = new GameDbContext();
+            var config = db.BotConfigs.FirstOrDefault();
+            if (config == null) return false;
+            var shutUpLastUsedSeconds = (DateTime.Now - config.ShutUpLastUsed).TotalSeconds;
+            if (usedShutUp)
+            {
+                if (shutUpLastUsedSeconds < config.ShutUpDuration && config.ShutUpEnabled)
+                {
+                    return true;
+                }
+
+                if (shutUpLastUsedSeconds >= config.ShutUpDuration && config.ShutUpEnabled)
+                {
+                    config.ShutUpEnabled = false;
+                    db.SaveChanges();
+                    return false;
+                }
+
+                if (config.ShutUpEnabled) return false;
+                config.ShutUpLastUsed = DateTime.Now;
+                config.ShutUpEnabled = true;
+                db.SaveChanges();
+                return true;
+            }
+            if (!config.ShutUpEnabled)
+                return false;
+            if (shutUpLastUsedSeconds < config.ShutUpDuration && config.ShutUpEnabled)
+                return true;
+
+            if (shutUpLastUsedSeconds >= config.ShutUpDuration && config.ShutUpEnabled)
+            {
+                config.ShutUpEnabled = false;
+                db.SaveChanges();
+                return false;
+            }
+            return false;
+        }
+
+        [Command("CancelShutUp")]
+        [Description("Cancels a shut up so the bot will respond to copy pastas again.")]
+        public async Task CancelShutUp(CommandContext ctx)
+        {
+            await using var db = new GameDbContext();
+            var config = db.BotConfigs.FirstOrDefault();
+            if (config == null) return;
+            var shutUpLastUsed = (DateTime.Now - config.ShutUpLastUsed).TotalSeconds;
+            if (config.ShutUpEnabled)
+            {
+                config.ShutUpEnabled = false;
+                await db.SaveChangesAsync();
+                await ctx.RespondAsync("The shut ups been cancelled. I CAN SING AGAIN!");
+            }
+            else
+            {
+                await ctx.RespondAsync("Nobody has told me to STFU.");
+            }
+
+
         }
 
         [Command("copypasta")]

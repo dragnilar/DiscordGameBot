@@ -4,14 +4,16 @@ using AutomoderatorGameBot.BackEnd.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AutomoderatorGameBot.BackEnd.Migrations
 {
     [DbContext(typeof(GameDbContext))]
-    partial class GameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201115043515_AddBotConfigs")]
+    partial class AddBotConfigs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +30,6 @@ namespace AutomoderatorGameBot.BackEnd.Migrations
 
                     b.Property<int>("ShutUpDuration")
                         .HasColumnType("int");
-
-                    b.Property<bool>("ShutUpEnabled")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("ShutUpLastUsed")
                         .HasColumnType("datetime2");
