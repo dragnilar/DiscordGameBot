@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AutomoderatorGameBot.BackEnd.Extensions
 {
@@ -24,5 +25,26 @@ namespace AutomoderatorGameBot.BackEnd.Extensions
             var result = text.Remove(place, stringToReplace.Length).Insert(place, replacementStringValue);
             return result;
         }
+        
+        /// <summary>
+        /// Jon Skeet's method of splitting strings into chunks.
+        /// See: https://stackoverflow.com/questions/1632078/split-string-in-512-char-chunks
+        /// </summary>
+        /// <param name="text">Text to split up</param>
+        /// <param name="chunkSize">Size of chunks</param>
+        /// <returns>text split into an IList with chunks of chunkSize</returns>
+        public static IList<string> SplitIntoChunks(this string text, int chunkSize)
+        {
+            var chunks = new List<string>();
+            var offset = 0;
+            while (offset < text.Length)
+            {
+                var size = Math.Min(chunkSize, text.Length - offset);
+                chunks.Add(text.Substring(offset, size));
+                offset += size;
+            }
+            return chunks;
+        }
+
     }
 }

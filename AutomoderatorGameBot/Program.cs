@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutomoderatorGameBot.BackEnd.Configuration;
 using AutomoderatorGameBot.Modules;
-using AutomoderatorGameBot.Singletons;
 using Config.Net;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
-using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using Microsoft.Extensions.Logging;
@@ -47,7 +43,6 @@ namespace AutomoderatorGameBot
             {
                 Token = _config.Token,
                 TokenType = TokenType.Bot,
-                LoggerFactory = new LoggerFactory(),
                 MinimumLogLevel = LogLevel.Error
             });
 
@@ -75,7 +70,7 @@ namespace AutomoderatorGameBot
 
             var copyPastaRun = await _copyPastaModule.ProcessCopyPastas(e);
             if (copyPastaRun) return;
-            
+
             var videoPasta = _copyPastaModule.VideoPastas.FirstOrDefault(x => x.Keyword == e.Message.Content.ToLower());
             if (videoPasta != null)
             {

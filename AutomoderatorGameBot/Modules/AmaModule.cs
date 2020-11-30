@@ -5,12 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutomoderatorGameBot.BackEnd.Extensions;
 using AutomoderatorGameBot.BackEnd.Models;
 using Bogus;
 using CsvHelper;
-using DSharpPlus;
-using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 
 namespace AutomoderatorGameBot.Modules
@@ -30,10 +27,7 @@ namespace AutomoderatorGameBot.Modules
             if (!reactions.Any()) return;
             var faker = new Faker();
             var responseBuilder = new StringBuilder();
-            for (var i = 0; i < 4; i++)
-            {
-                responseBuilder.Append(faker.Random.ListItem(reactions).Response + "\n");
-            }
+            for (var i = 0; i < 4; i++) responseBuilder.Append(faker.Random.ListItem(reactions).Response + "\n");
             await e.Message.RespondAsync(responseBuilder.ToString());
         }
     }

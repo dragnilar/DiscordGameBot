@@ -4,10 +4,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutomoderatorGameBot.BackEnd.DbContexts;
+using AutomoderatorGameBot.BackEnd.Extensions;
 using AutomoderatorGameBot.BackEnd.Models;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using CsvHelper;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
@@ -39,11 +40,9 @@ namespace AutomoderatorGameBot.Modules
         {
             var copyPasta = CopyPastas.FirstOrDefault(x => x.Command == e.Message.Content.ToLower());
             if (copyPasta == null) return false;
-            if (ShutUp(copyPasta.ShutUp))
-            {
-                return true;
-            }
+            if (ShutUp(copyPasta.ShutUp)) return true;
             if (!string.IsNullOrWhiteSpace(copyPasta.OptionalPicture))
+            {
                 switch (copyPasta.Pasta.ToLower())
                 {
                     case "no text":
@@ -55,12 +54,24 @@ namespace AutomoderatorGameBot.Modules
                             Path.Combine(Environment.CurrentDirectory, copyPasta.OptionalPicture), copyPasta.Pasta);
                         break;
                 }
+            }
             else
-                await e.Message.RespondAsync(copyPasta.Pasta);
+            {
+                if (copyPasta.Pasta.Length > 2000)
+                {
+                    var copyPastaArray = copyPasta.Pasta.SplitIntoChunks(2000);
+                    foreach (var pastaPart in copyPastaArray) await e.Message.RespondAsync(pastaPart);
+                }
+                else
+                {
+                    await e.Message.RespondAsync(copyPasta.Pasta);
+                }
+            }
+
 
             return true;
         }
-
+        
         private bool ShutUp(bool usedShutUp)
         {
             using var db = new GameDbContext();
@@ -69,10 +80,7 @@ namespace AutomoderatorGameBot.Modules
             var shutUpLastUsedSeconds = (DateTime.Now - config.ShutUpLastUsed).TotalSeconds;
             if (usedShutUp)
             {
-                if (shutUpLastUsedSeconds < config.ShutUpDuration && config.ShutUpEnabled)
-                {
-                    return true;
-                }
+                if (shutUpLastUsedSeconds < config.ShutUpDuration && config.ShutUpEnabled) return true;
 
                 if (shutUpLastUsedSeconds >= config.ShutUpDuration && config.ShutUpEnabled)
                 {
@@ -87,6 +95,7 @@ namespace AutomoderatorGameBot.Modules
                 db.SaveChanges();
                 return true;
             }
+
             if (!config.ShutUpEnabled)
                 return false;
             if (shutUpLastUsedSeconds < config.ShutUpDuration && config.ShutUpEnabled)
@@ -98,6 +107,7 @@ namespace AutomoderatorGameBot.Modules
                 db.SaveChanges();
                 return false;
             }
+
             return false;
         }
 
@@ -119,8 +129,6 @@ namespace AutomoderatorGameBot.Modules
             {
                 await ctx.RespondAsync("Nobody has told me to STFU.");
             }
-
-
         }
 
         [Command("copypasta")]

@@ -7,9 +7,9 @@ namespace AutomoderatorGameBot.BackEnd.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "ShutUpEnabled",
-                table: "BotConfigs",
-                type: "bit",
+                "ShutUpEnabled",
+                "BotConfigs",
+                "bit",
                 nullable: false,
                 defaultValue: false);
         }
@@ -17,8 +17,8 @@ namespace AutomoderatorGameBot.BackEnd.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ShutUpEnabled",
-                table: "BotConfigs");
+                "ShutUpEnabled",
+                "BotConfigs");
         }
     }
 }

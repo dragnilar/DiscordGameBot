@@ -155,6 +155,7 @@ namespace AutomoderatorGameBot.Modules
                     optionsBuilder.Append(" *" + option.ChoiceName + "* ");
                     choiceNumber++;
                 }
+
                 embed.AddField("Missions", optionsBuilder.ToString(), true);
                 await ctx.RespondAsync("", embed: embed);
                 while (DateTime.Now < DateTime.Now.AddSeconds(120))

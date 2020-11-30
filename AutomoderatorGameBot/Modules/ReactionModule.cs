@@ -27,7 +27,8 @@ namespace AutomoderatorGameBot.Modules
                 (x => e.Message.Content.ToLower().Contains(x.ReactKeyword)).ToList();
             if (!reactions.Any()) return;
             var reactionCount = 0;
-            foreach (var emoji in reactions.Select(reaction => DiscordEmoji.FromName(client, reaction.ReactionEmojiCode)))
+            foreach (var emoji in reactions.Select(
+                reaction => DiscordEmoji.FromName(client, reaction.ReactionEmojiCode)))
             {
                 await e.Message.CreateReactionAsync(emoji);
                 reactionCount++;

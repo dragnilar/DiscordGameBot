@@ -8,24 +8,21 @@ namespace AutomoderatorGameBot.BackEnd.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "BotConfigs",
-                columns: table => new
+                "BotConfigs",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ShutUpLastUsed = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ShutUpDuration = table.Column<int>(type: "int", nullable: false)
+                    ShutUpLastUsed = table.Column<DateTime>("datetime2", nullable: false),
+                    ShutUpDuration = table.Column<int>("int", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BotConfigs", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_BotConfigs", x => x.Id); });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BotConfigs");
+                "BotConfigs");
         }
     }
 }
