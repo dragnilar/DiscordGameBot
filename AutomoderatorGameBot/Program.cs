@@ -43,7 +43,7 @@ namespace AutomoderatorGameBot
             {
                 Token = _config.Token,
                 TokenType = TokenType.Bot,
-                MinimumLogLevel = LogLevel.Error
+                MinimumLogLevel = LogLevel.Information
             });
 
             _discordClient.MessageCreated += async e => { await CheckForCannedResponses(e); };
