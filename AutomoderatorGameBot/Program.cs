@@ -17,7 +17,6 @@ namespace AutomoderatorGameBot
         private static DiscordClient _discordClient;
         private static CommandsNextExtension _commandsNext;
         private static CopyPastaModule _copyPastaModule;
-        private static NamModule _namModule;
         private static ShittyVerseModule _shittyVerseModule;
         private static AmaModule _amaModule;
         private static IAutomoderatorGameBotBackEndConfig _config;
@@ -32,7 +31,6 @@ namespace AutomoderatorGameBot
             _copyPastaModule = new CopyPastaModule();
             _reactionModule = new ReactionModule();
             _amaModule = new AmaModule();
-            _namModule = new NamModule();
             _shittyVerseModule = new ShittyVerseModule();
             MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
         }
@@ -53,7 +51,6 @@ namespace AutomoderatorGameBot
                 StringPrefixes = new List<string> {"plz", "PLZ", "Plz"}
             });
             _commandsNext.RegisterCommands<ShittyModule>();
-            _commandsNext.RegisterCommands<NamModule>();
             _commandsNext.RegisterCommands<ShittyVerseModule>();
             _commandsNext.RegisterCommands<CopyPastaModule>();
 

@@ -73,6 +73,9 @@
       <None Update="Videos\kraut.mp4">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+	  <None Update="Videos\finger.mp4">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>

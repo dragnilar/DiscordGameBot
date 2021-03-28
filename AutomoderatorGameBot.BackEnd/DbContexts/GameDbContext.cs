@@ -13,6 +13,9 @@ namespace AutomoderatorGameBot.BackEnd.DbContexts
         public DbSet<CoolDown> CoolDowns { get; set; }
         public DbSet<MiniGameChoice> MiniGameChoices { get; set; }
         public DbSet<BotConfig> BotConfigs { get; set; }
+        public DbSet<CharacterClass> CharacterClasses { get; set; }
+        public DbSet<ClassEquipment> ClassEquipments { get; set; }
+        public DbSet<ItemEffect> ItemEffects {get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
