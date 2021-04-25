@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyVersion>2020.1116.0.0</AssemblyVersion>
-    <FileVersion>2020.1116.0.0</FileVersion>
+    <AssemblyVersion>2021.0425.3.0</AssemblyVersion>
+    <FileVersion>2021.0425.3.0</FileVersion>
     <Configurations>Release;Debug</Configurations>
     <Platforms>x64</Platforms>
   </PropertyGroup>

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Bogus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 
 namespace AutomoderatorGameBot.Modules
 {
@@ -15,8 +16,9 @@ namespace AutomoderatorGameBot.Modules
         {
             var faker = new Faker();
             var roll = faker.Random.Int(1, 45);
-            var response = Path.Combine(Environment.CurrentDirectory, $"Pictures\\Boxes\\box{roll}.jpg");
-            await ctx.RespondWithFileAsync(response);
+            var filePath = Path.Combine(Environment.CurrentDirectory, $"Pictures\\Boxes\\box{roll}.jpg");
+            await using var boxStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            await new DiscordMessageBuilder().WithFile(boxStream).SendAsync(ctx.Channel);
         }
 
         [Command("urine")]

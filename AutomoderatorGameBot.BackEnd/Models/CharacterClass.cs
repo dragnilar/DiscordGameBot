@@ -8,5 +8,6 @@ namespace AutomoderatorGameBot.BackEnd.Models
 {
     public class CharacterClass
     {
+        public int Id { get; set; }
     }
 }

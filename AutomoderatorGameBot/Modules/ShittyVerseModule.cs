@@ -11,6 +11,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Extensions;
 
 namespace AutomoderatorGameBot.Modules
 {
@@ -29,7 +30,7 @@ namespace AutomoderatorGameBot.Modules
             else
             {
                 var embed = new DiscordEmbedBuilder();
-                embed.Title = $"{ctx.Member.Nickname}'s Balance";
+                embed.Title = $"{ctx.Member.DisplayName}'s Balance";
                 embed.Description = "This is your current balance of shit coins.";
                 embed.AddField("Shit Coins", $"{player.ShitCoins:C2}");
 

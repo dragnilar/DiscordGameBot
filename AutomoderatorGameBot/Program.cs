@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutomoderatorGameBot.BackEnd.Configuration;
 using AutomoderatorGameBot.Modules;
 using Config.Net;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Extensions;
+using Emzi0767.Utilities;
 using Microsoft.Extensions.Logging;
 
 namespace AutomoderatorGameBot
@@ -44,7 +50,7 @@ namespace AutomoderatorGameBot
                 MinimumLogLevel = LogLevel.Information
             });
 
-            _discordClient.MessageCreated += async e => { await CheckForCannedResponses(e); };
+            _discordClient.MessageCreated += CheckForCannedResponses;
 
             _commandsNext = _discordClient.UseCommandsNext(new CommandsNextConfiguration
             {
@@ -59,9 +65,14 @@ namespace AutomoderatorGameBot
             await Task.Delay(-1);
         }
 
-        private static async Task CheckForCannedResponses(MessageCreateEventArgs e)
+        private static Task DiscordClientOnMessageCreated(DiscordClient sender, MessageCreateEventArgs e)
         {
-            if (e.Author == e.Client.CurrentUser) return;
+            throw new System.NotImplementedException();
+        }
+
+        private static async Task CheckForCannedResponses(DiscordClient sender, MessageCreateEventArgs e)
+        {
+            if (e.Author.IsCurrent) return;
 
             await _reactionModule.ProcessReactions(e, _discordClient);
 
@@ -71,8 +82,9 @@ namespace AutomoderatorGameBot
             var videoPasta = _copyPastaModule.VideoPastas.FirstOrDefault(x => x.Keyword == e.Message.Content.ToLower());
             if (videoPasta != null)
             {
-                await e.Message.RespondWithFileAsync(videoPasta.FilePath, videoPasta.Description);
-                return;
+                await using var videoFileStream = new FileStream(videoPasta.FilePath, FileMode.Open, FileAccess.Read);
+                await new DiscordMessageBuilder().WithContent(videoPasta.Description).WithFile(videoFileStream)
+                    .SendAsync(e.Channel);
             }
 
             if (e.Message.Content.ToLower().EndsWith(" ama"))

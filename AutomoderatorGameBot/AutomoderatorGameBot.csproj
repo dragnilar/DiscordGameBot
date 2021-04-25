@@ -4,8 +4,8 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
         <ApplicationIcon>GoogunkBot.ico</ApplicationIcon>
-        <AssemblyVersion>2020.1116.0.0</AssemblyVersion>
-        <FileVersion>2020.1116.0.0</FileVersion>
+        <AssemblyVersion>2021.0425.7.0</AssemblyVersion>
+        <FileVersion>2021.0425.7.0</FileVersion>
         <Configurations>Release;Debug</Configurations>
         <Platforms>x64</Platforms>
     </PropertyGroup>
@@ -56,8 +56,6 @@
       <None Remove="Pictures\Boxes\box7.jpg" />
       <None Remove="Pictures\Boxes\box8.jpg" />
       <None Remove="Pictures\Boxes\box9.jpg" />
-      <None Remove="Videos\ununun.mp4" />
-      <None Remove="Videos\youme.mp4" />
       <None Update="Csv\AmaStrings.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
@@ -70,12 +68,39 @@
       <None Update="Videos\a.mp4">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Videos\amogus.mp4">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Videos\barbaraann.mov">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Videos\gilbert.mp4">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
       <None Update="Videos\kraut.mp4">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
 	  <None Update="Videos\finger.mp4">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+	  <None Update="Videos\nft.mp4">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Videos\plunger.mp4">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Videos\power_of_god.mp4">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Videos\rock_paper_scissors.mp4">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Videos\ununun.mp4">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Videos\youme.mp4">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -219,22 +244,8 @@
       <Content Include="Pictures\Other\keira.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <None Remove="Videos\power_of_god.mp4" />
-      <Content Include="Videos\power_of_god.mp4">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Csv\Videos.csv" />
       <Content Include="Csv\Videos.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <None Remove="Videos\gilbert.mp4" />
-      <Content Include="Videos\gilbert.mp4">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Videos\ununun.mp4">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Videos\youme.mp4">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <None Remove="Csv\Reactions.csv" />
@@ -248,11 +259,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Bogus" Version="32.0.2" />
-      <PackageReference Include="CsvHelper" Version="19.0.0" />
-      <PackageReference Include="DSharpPlus" Version="4.0.0-nightly-00719" />
-      <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.0-nightly-00719" />
-      <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.0-nightly-00719" />
+      <PackageReference Include="Bogus" Version="33.0.2" />
+      <PackageReference Include="CsvHelper" Version="27.0.0" />
+      <PackageReference Include="DSharpPlus" Version="4.0.0" />
+      <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.0" />
+      <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.0" />
       <PackageReference Include="WaffleGenerator.Bogus" Version="4.2.0" />
     </ItemGroup>
 

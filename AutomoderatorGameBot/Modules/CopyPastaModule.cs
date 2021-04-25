@@ -43,16 +43,16 @@ namespace AutomoderatorGameBot.Modules
             if (ShutUp(copyPasta.ShutUp)) return true;
             if (!string.IsNullOrWhiteSpace(copyPasta.OptionalPicture))
             {
-                switch (copyPasta.Pasta.ToLower())
+                if (!string.IsNullOrEmpty(copyPasta.OptionalPicture) && copyPasta.Pasta.ToLower() == "no text")
                 {
-                    case "no text":
-                        await e.Message.RespondWithFileAsync(
-                            Path.Combine(Environment.CurrentDirectory, copyPasta.OptionalPicture), string.Empty);
-                        break;
-                    default:
-                        await e.Message.RespondWithFileAsync(
-                            Path.Combine(Environment.CurrentDirectory, copyPasta.OptionalPicture), copyPasta.Pasta);
-                        break;
+                    await using var stream = new FileStream(Path.Combine(Environment.CurrentDirectory, copyPasta.OptionalPicture), FileMode.Open, FileAccess.Read);
+                    await new DiscordMessageBuilder().WithFile(stream).SendAsync(e.Channel);
+
+                }
+                else
+                {
+                    await using var stream = new FileStream(Path.Combine(Environment.CurrentDirectory, copyPasta.OptionalPicture), FileMode.Open, FileAccess.Read);
+                    await new DiscordMessageBuilder().WithContent(copyPasta.Pasta).WithFile(stream).SendAsync(e.Channel);
                 }
             }
             else
@@ -71,7 +71,7 @@ namespace AutomoderatorGameBot.Modules
 
             return true;
         }
-        
+
         private bool ShutUp(bool usedShutUp)
         {
             using var db = new GameDbContext();
@@ -152,7 +152,29 @@ namespace AutomoderatorGameBot.Modules
                 Description = "These are the available shitty copy pasta triggers that you may trigger:"
             };
             embed.AddField("Key Words", builder.ToString());
-            await ctx.RespondAsync(null, false, embed.Build());
+            await new DiscordMessageBuilder().WithEmbed(embed.Build()).SendAsync(ctx.Channel);
+        }
+
+        [Command("videos")]
+        [Description(
+            "Lists all of the video pastas that you can annoy yourself with....")]
+        public async Task VideoHelp(CommandContext ctx)
+        {
+            var builder = new StringBuilder();
+            for (var i = 0; i < VideoPastas.Count; i++)
+            {
+                builder.Append(VideoPastas[i].Keyword);
+                if (i != VideoPastas.Count - 1) builder.Append(", ");
+            }
+
+            var embed = new DiscordEmbedBuilder
+            {
+                Title = "Video Pastas",
+                Color = new Optional<DiscordColor>(DiscordColor.DarkGreen),
+                Description = "These are available video pastas that you can trigger:"
+            };
+            embed.AddField("Key Words", builder.ToString());
+            await new DiscordMessageBuilder().WithEmbed(embed.Build()).SendAsync(ctx.Channel);
         }
     }
 }

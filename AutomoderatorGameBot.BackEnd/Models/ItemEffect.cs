@@ -8,5 +8,6 @@ namespace AutomoderatorGameBot.BackEnd.Models
 {
     public class ItemEffect
     {
+        public int Id { get; set; }
     }
 }
