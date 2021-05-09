@@ -101,6 +101,9 @@
 	  <None Update="Videos\youme.mp4">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Videos\pie.mp4">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
     </ItemGroup>
 
     <ItemGroup>
