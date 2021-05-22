@@ -1,11 +1,9 @@
 # DiscordGameBot
-A silly game bot in .NET Core that I created for myself and my friends Discord Server. 
+A silly game bot in .NET Core that I created for myself. The game itself is mostly unimplemnted at this point as it's mostly used for other dumb purposes.
 
-I unfortunately never got around to fully implementing the game due to time constraints and also lack of interest from my friends.
+I still work on this occasionaly but it is not intended to be a significant time investment. 
 
-This is now archived since I quit using Discord and do not have any plans on resuming development or returning to Discord.
-
-In the very least, you can use it as an example for the following:
+If you are curious, this can be used as an example for the following:
 
 - Using DSharpPlus for interaction with the Discord API
 
