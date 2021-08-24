@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
-        <ApplicationIcon>GoogunkBot.ico</ApplicationIcon>
+        <ApplicationIcon>csharp.ico</ApplicationIcon>
         <AssemblyVersion>2021.0425.7.0</AssemblyVersion>
         <FileVersion>2021.0425.7.0</FileVersion>
         <Configurations>Release;Debug</Configurations>
@@ -11,54 +11,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Pictures\Boxes\box1.jpg" />
-      <None Remove="Pictures\Boxes\box10.jpg" />
-      <None Remove="Pictures\Boxes\box11.jpg" />
-      <None Remove="Pictures\Boxes\box12.jpg" />
-      <None Remove="Pictures\Boxes\box13.jpg" />
-      <None Remove="Pictures\Boxes\box14.jpg" />
-      <None Remove="Pictures\Boxes\box15.jpg" />
-      <None Remove="Pictures\Boxes\box16.jpg" />
-      <None Remove="Pictures\Boxes\box17.jpg" />
-      <None Remove="Pictures\Boxes\box18.jpg" />
-      <None Remove="Pictures\Boxes\box19.jpg" />
-      <None Remove="Pictures\Boxes\box2.jpg" />
-      <None Remove="Pictures\Boxes\box20.jpg" />
-      <None Remove="Pictures\Boxes\box21.jpg" />
-      <None Remove="Pictures\Boxes\box22.jpg" />
-      <None Remove="Pictures\Boxes\box23.jpg" />
-      <None Remove="Pictures\Boxes\box24.jpg" />
-      <None Remove="Pictures\Boxes\box25.jpg" />
-      <None Remove="Pictures\Boxes\box26.jpg" />
-      <None Remove="Pictures\Boxes\box27.jpg" />
-      <None Remove="Pictures\Boxes\box28.jpg" />
-      <None Remove="Pictures\Boxes\box29.jpg" />
-      <None Remove="Pictures\Boxes\box3.jpg" />
-      <None Remove="Pictures\Boxes\box30.jpg" />
-      <None Remove="Pictures\Boxes\box31.jpg" />
-      <None Remove="Pictures\Boxes\box32.jpg" />
-      <None Remove="Pictures\Boxes\box33.jpg" />
-      <None Remove="Pictures\Boxes\box34.jpg" />
-      <None Remove="Pictures\Boxes\box35.jpg" />
-      <None Remove="Pictures\Boxes\box36.jpg" />
-      <None Remove="Pictures\Boxes\box37.jpg" />
-      <None Remove="Pictures\Boxes\box38.jpg" />
-      <None Remove="Pictures\Boxes\box39.jpg" />
-      <None Remove="Pictures\Boxes\box4.jpg" />
-      <None Remove="Pictures\Boxes\box40.jpg" />
-      <None Remove="Pictures\Boxes\box41.jpg" />
-      <None Remove="Pictures\Boxes\box42.jpg" />
-      <None Remove="Pictures\Boxes\box43.jpg" />
-      <None Remove="Pictures\Boxes\box44.jpg" />
-      <None Remove="Pictures\Boxes\box45.jpg" />
-      <None Remove="Pictures\Boxes\box5.jpg" />
-      <None Remove="Pictures\Boxes\box6.jpg" />
-      <None Remove="Pictures\Boxes\box7.jpg" />
-      <None Remove="Pictures\Boxes\box8.jpg" />
-      <None Remove="Pictures\Boxes\box9.jpg" />
-      <None Update="Csv\AmaStrings.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
       <None Update="Csv\CopyPasta.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
@@ -107,141 +59,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Pictures\Boxes\box1.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box10.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box11.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box12.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box13.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box14.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box15.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box16.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box17.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box18.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box19.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box2.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box20.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box21.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box22.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box23.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box24.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box25.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box26.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box27.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box28.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box29.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box3.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box30.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box31.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box32.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box33.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box34.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box35.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box36.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box37.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box38.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box39.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box4.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box40.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box41.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box42.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box43.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box44.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box45.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box5.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box6.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box7.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box8.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Pictures\Boxes\box9.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Csv\CopyPasta.xlsx" />
       <None Remove="Pictures\Other\keira.jpg" />
       <Content Include="Pictures\Other\keira.jpg">
@@ -249,10 +66,6 @@
       </Content>
       <None Remove="Csv\Videos.csv" />
       <Content Include="Csv\Videos.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <None Remove="Csv\Reactions.csv" />
-      <Content Include="Csv\Reactions.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <None Remove="Pictures\Other\ramranch.jpg" />
@@ -263,11 +76,11 @@
 
     <ItemGroup>
       <PackageReference Include="Bogus" Version="33.0.2" />
-      <PackageReference Include="CsvHelper" Version="27.0.0" />
-      <PackageReference Include="DSharpPlus" Version="4.0.0" />
-      <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.0" />
-      <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.0" />
-      <PackageReference Include="WaffleGenerator.Bogus" Version="4.2.0" />
+      <PackageReference Include="CsvHelper" Version="27.1.0" />
+      <PackageReference Include="DSharpPlus" Version="4.0.1" />
+      <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.1" />
+      <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.1" />
+      <PackageReference Include="WaffleGenerator.Bogus" Version="4.2.1" />
     </ItemGroup>
 
     <ItemGroup>

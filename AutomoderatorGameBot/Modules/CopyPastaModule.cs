@@ -39,7 +39,7 @@ namespace AutomoderatorGameBot.Modules
         public async Task<bool> ProcessCopyPastas(MessageCreateEventArgs e)
         {
             var copyPasta = CopyPastas.FirstOrDefault(x => x.Command == e.Message.Content.ToLower());
-            if (copyPasta == null) return false;
+            ;if (copyPasta == null) return false;
             if (ShutUp(copyPasta.ShutUp)) return true;
             if (!string.IsNullOrWhiteSpace(copyPasta.OptionalPicture))
             {

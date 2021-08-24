@@ -24,10 +24,8 @@ namespace AutomoderatorGameBot
         private static CommandsNextExtension _commandsNext;
         private static CopyPastaModule _copyPastaModule;
         private static ShittyVerseModule _shittyVerseModule;
-        private static AmaModule _amaModule;
         private static IAutomoderatorGameBotBackEndConfig _config;
         public static InteractivityExtension InteractivityExtension;
-        private static ReactionModule _reactionModule;
 
         private static void Main(string[] args)
         {
@@ -35,8 +33,6 @@ namespace AutomoderatorGameBot
                 .UseJsonConfig()
                 .Build();
             _copyPastaModule = new CopyPastaModule();
-            _reactionModule = new ReactionModule();
-            _amaModule = new AmaModule();
             _shittyVerseModule = new ShittyVerseModule();
             MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
         }
@@ -54,9 +50,10 @@ namespace AutomoderatorGameBot
 
             _commandsNext = _discordClient.UseCommandsNext(new CommandsNextConfiguration
             {
-                StringPrefixes = new List<string> {"plz", "PLZ", "Plz"}
+                EnableMentionPrefix = true,
+                StringPrefixes = new List<string> {_config.CommandPrefix}, 
+                CaseSensitive = false
             });
-            _commandsNext.RegisterCommands<ShittyModule>();
             _commandsNext.RegisterCommands<ShittyVerseModule>();
             _commandsNext.RegisterCommands<CopyPastaModule>();
 
@@ -65,20 +62,11 @@ namespace AutomoderatorGameBot
             await Task.Delay(-1);
         }
 
-        private static Task DiscordClientOnMessageCreated(DiscordClient sender, MessageCreateEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
         private static async Task CheckForCannedResponses(DiscordClient sender, MessageCreateEventArgs e)
         {
             if (e.Author.IsCurrent) return;
-
-            await _reactionModule.ProcessReactions(e, _discordClient);
-
             var copyPastaRun = await _copyPastaModule.ProcessCopyPastas(e);
             if (copyPastaRun) return;
-
             var videoPasta = _copyPastaModule.VideoPastas.FirstOrDefault(x => x.Keyword == e.Message.Content.ToLower());
             if (videoPasta != null)
             {
@@ -86,9 +74,6 @@ namespace AutomoderatorGameBot
                 await new DiscordMessageBuilder().WithContent(videoPasta.Description).WithFile(videoFileStream)
                     .SendAsync(e.Channel);
             }
-
-            if (e.Message.Content.ToLower().EndsWith(" ama"))
-                await _amaModule.ProcessReactions(e);
         }
     }
 }
